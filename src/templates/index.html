@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    {% include 'head.html' %}
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+            {% include 'sidebar.html' %}
+        <!-- End Sidebar -->
+
+        <!-- main -->
+        <div class="main-panel">
+            <!-- Header -->
+                {% include 'header.html' %}
+            <!-- End Header -->
+
+            <!-- Container -->
+                {% include 'container.html' %}
+            <!-- End Container -->
+
+            <!-- Footer -->
+                {% include 'footer.html' %}
+            <!-- End Footer -->
+        </div>
+        <!--  End main  -->
+
+        <!-- Custom settings -->
+            {% include 'custom.html' %}
+        <!-- End Custom settings -->
+    </div>
+    <!--  All scripts  -->
+    {% include 'scripts.html' %}
+</body>
+</html>
