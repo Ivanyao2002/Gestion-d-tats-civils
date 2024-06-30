@@ -1,100 +1,122 @@
+from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
+from django.utils import timezone
 
-class Utilisateur(models.Model):
-    nom_user = models.CharField(max_length=100)
-    prenom_user = models.CharField(max_length=100)
-    telephone = models.CharField(max_length=20)
+class MyUserManager(BaseUserManager):
+    def create_user(self, username, password=None):
+        if not username:
+            raise ValueError("You must provide a username")
+
+        user = self.model(username=username)
+        user.set_password(password)
+        user.save()
+        return user
+
+    def create_superuser(self, username, password=None):
+        user = self.create_user(username=username, password=password)
+        user.is_staff = True
+        user.is_superuser = True
+        user.save()
+        return user
+
+class User(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
     email = models.EmailField()
     role = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images/')
+    USERNAME_FIELD = 'username'
+    objects = MyUserManager()
 
-class Mariage(models.Model):
-    lieu_mariage = models.CharField(max_length=100)
-    date_enregistrement = models.DateField()
-    prenom_epoux = models.CharField(max_length=100)
-    nom_epoux = models.CharField(max_length=100)
-    lieu_naissance_epoux = models.CharField(max_length=100)
-    date_naissance_epoux = models.DateField()
-    profession_epoux = models.CharField(max_length=100)
-    adresse_epoux = models.CharField(max_length=200)
-    registre_mariage = models.CharField(max_length=100)
-    temoin1 = models.CharField(max_length=100)
-    temoin2 = models.CharField(max_length=100)
+class Registry(models.Model):
+    deputies = models.CharField(max_length=100)
+    annexes = models.CharField(max_length=100)
+    registry_id = models.CharField(max_length=100)
+    creation_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.registry_id
+
+class Marriage(models.Model):
+    registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
+    marriage_location = models.CharField(max_length=100)
+    registration_date = models.DateField()
+    groom_first_name = models.CharField(max_length=100)
+    groom_last_name = models.CharField(max_length=100)
+    groom_birthplace = models.CharField(max_length=100)
+    groom_birthdate = models.DateField()
+    groom_profession = models.CharField(max_length=100)
+    groom_address = models.CharField(max_length=200)
+    marriage_register = models.CharField(max_length=100)
+    witness1 = models.CharField(max_length=100)
+    witness2 = models.CharField(max_length=100)
     photo = models.ImageField(upload_to='images/')
-    def __str__(self):
-        return f'Mariage entre {self.nom_epoux} et {self.prenom_epoux}'
+    creation_date = models.DateTimeField(default=timezone.now)
 
-class Deces(models.Model):
-    id_deces = models.AutoField(primary_key=True)
-    age_declarant = models.IntegerField()
-    residence_principal_declarant = models.CharField(max_length=200)
-    lieu_deces = models.CharField(max_length=100)
-    date_deces = models.DateField()
-    nom_defunt = models.CharField(max_length=100)
-    prenom_defunt = models.CharField(max_length=100)
-    lieu_naissance_defunt = models.CharField(max_length=100)
-    date_naissance_defunt = models.DateField()
-    profession_defunt = models.CharField(max_length=100)
     def __str__(self):
-        return self.nom_defunt
+        return f'Marriage between {self.groom_last_name} and {self.groom_first_name}'
 
-class Naissance(models.Model):
-    lieu_enregistrement = models.CharField(max_length=100)
-    date_naissance = models.DateField()
-    nom_enfant = models.CharField(max_length=100)
-    prenom_enfant = models.CharField(max_length=100)
-    lieu_naissance = models.CharField(max_length=100)
-    nom_pere = models.CharField(max_length=100)
-    prenom_pere = models.CharField(max_length=100)
-    profession_pere = models.CharField(max_length=100)
-    adresse_pere = models.CharField(max_length=200)
+class Death(models.Model):
+    registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
+    death_id = models.AutoField(primary_key=True)
+    declarant_age = models.IntegerField()
+    declarant_main_residence = models.CharField(max_length=200)
+    death_location = models.CharField(max_length=100)
+    death_date = models.DateField()
+    deceased_last_name = models.CharField(max_length=100)
+    deceased_first_name = models.CharField(max_length=100)
+    deceased_birthplace = models.CharField(max_length=100)
+    deceased_birthdate = models.DateField()
+    deceased_profession = models.CharField(max_length=100)
+    creation_date = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
-        return self.nom_enfant
+        return self.deceased_last_name
+
+class Birth(models.Model):
+    registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
+    registration_location = models.CharField(max_length=100)
+    birth_date = models.DateField()
+    child_last_name = models.CharField(max_length=100)
+    child_first_name = models.CharField(max_length=100)
+    birthplace = models.CharField(max_length=100)
+    father_last_name = models.CharField(max_length=100)
+    father_first_name = models.CharField(max_length=100)
+    father_profession = models.CharField(max_length=100)
+    father_address = models.CharField(max_length=200)
+    creation_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.child_last_name
 
 class Divorce(models.Model):
-    lieu_jugement = models.CharField(max_length=100)
-    date_jugement = models.DateField()
-    nom_epoux = models.CharField(max_length=100)
-    prenom_epoux = models.CharField(max_length=100)
-    lieu_naissance_epoux = models.CharField(max_length=100)
-    date_naissance_epoux = models.DateField()
-    nom_epouse = models.CharField(max_length=100)
-    prenom_epouse = models.CharField(max_length=100)
-    lieu_naissance_epouse = models.CharField(max_length=100)
-    date_naissance_epouse = models.DateField()
-    def __str__(self):
-        return f'Divorce entre {self.nom_epoux} et {self.prenom_epoux}'
+    registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
+    court_location = models.CharField(max_length=100)
+    court_date = models.DateField()
+    husband_last_name = models.CharField(max_length=100)
+    husband_first_name = models.CharField(max_length=100)
+    husband_birthplace = models.CharField(max_length=100)
+    husband_birthdate = models.DateField()
+    wife_last_name = models.CharField(max_length=100)
+    wife_first_name = models.CharField(max_length=100)
+    wife_birthplace = models.CharField(max_length=100)
+    wife_birthdate = models.DateField()
+    creation_date = models.DateTimeField(default=timezone.now)
 
-class Message(models.Model):
-    id_destinataire = models.ForeignKey(Utilisateur, related_name='destinataire', on_delete=models.CASCADE)
-    id_auteur = models.ForeignKey(Utilisateur, related_name='auteur', on_delete=models.CASCADE)
-    titre = models.CharField(max_length=200)
-    texte = models.TextField()
     def __str__(self):
-        return self.titre
+        return f'Divorce between {self.husband_last_name} and {self.husband_first_name}'
 
-class Demande(models.Model):
-    id_demande = models.AutoField(primary_key=True)
-    nom = models.CharField(max_length=100)
-    prenom = models.CharField(max_length=100)
-    telephone = models.CharField(max_length=20)
+class Request(models.Model):
+    registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
+    request_id = models.AutoField(primary_key=True)
+    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
     email = models.EmailField()
-    objet = models.CharField(max_length=200)
+    subject = models.CharField(max_length=200)
     message = models.TextField()
-    def __str__(self):
-        return self.objet
+    creation_date = models.DateTimeField(default=timezone.now)
 
-class Registre(models.Model):
-    adjoints = models.CharField(max_length=100)
-    annexes = models.CharField(max_length=100)
-    id_registre = models.CharField(max_length=100)
     def __str__(self):
-        return self.id_registre
-
-class FormationSanitaire(models.Model):
-    id_formation = models.AutoField(primary_key=True)
-    code_formation = models.CharField(max_length=100)
-    libelle_formation = models.CharField(max_length=200)
-    type_formation = models.CharField(max_length=100)
-    def __str__(self):
-        return self.libelle_formation
+        return self.subject
