@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from django.utils import timezone
 
+
 class MyUserManager(BaseUserManager):
     def create_user(self, username, password=None):
         if not username:
@@ -19,6 +20,7 @@ class MyUserManager(BaseUserManager):
         user.save()
         return user
 
+
 class User(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -29,14 +31,16 @@ class User(models.Model):
     USERNAME_FIELD = 'username'
     objects = MyUserManager()
 
+
 class Registry(models.Model):
-    deputies = models.CharField(max_length=100)
-    annexes = models.CharField(max_length=100)
+    deputies = models.CharField(max_length=100, null=True)
+    annexes = models.CharField(max_length=100, null=True)
     registry_id = models.CharField(max_length=100)
     creation_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.registry_id
+
 
 class Marriage(models.Model):
     registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
@@ -57,6 +61,7 @@ class Marriage(models.Model):
     def __str__(self):
         return f'Marriage between {self.groom_last_name} and {self.groom_first_name}'
 
+
 class Death(models.Model):
     registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
     death_id = models.AutoField(primary_key=True)
@@ -74,21 +79,24 @@ class Death(models.Model):
     def __str__(self):
         return self.deceased_last_name
 
+
 class Birth(models.Model):
     registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
-    registration_location = models.CharField(max_length=100)
+    # registration_location = models.CharField(max_length=100)
     birth_date = models.DateField()
+    birth_time = models.TimeField()
     child_last_name = models.CharField(max_length=100)
     child_first_name = models.CharField(max_length=100)
     birthplace = models.CharField(max_length=100)
-    father_last_name = models.CharField(max_length=100)
-    father_first_name = models.CharField(max_length=100)
+    father = models.CharField(max_length=100)
+    mother = models.CharField(max_length=100)
     father_profession = models.CharField(max_length=100)
-    father_address = models.CharField(max_length=200)
+    mother_profession = models.CharField(max_length=200)
     creation_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.child_last_name
+
 
 class Divorce(models.Model):
     registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
@@ -106,6 +114,7 @@ class Divorce(models.Model):
 
     def __str__(self):
         return f'Divorce between {self.husband_last_name} and {self.husband_first_name}'
+
 
 class Request(models.Model):
     registry = models.ForeignKey(Registry, on_delete=models.CASCADE)

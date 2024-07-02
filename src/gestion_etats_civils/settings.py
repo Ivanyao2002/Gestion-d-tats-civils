@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Model',
+    'Birth_Certificate'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mairie_db',
         'USER': 'postgres',
-        'PASSWORD': '0000',
+        'PASSWORD': 'Pipi1306',
         'HOST': 'localhost',
         'PORT': '5432',
     }
