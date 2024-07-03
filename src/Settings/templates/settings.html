@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .page-inner {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .page-header {
+            margin-bottom: 20px;
+        }
+        .breadcrumbs {
+            padding: 0;
+            list-style-type: none;
+            margin: 0;
+        }
+        .breadcrumbs li {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        .breadcrumbs li a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .breadcrumbs li.separator {
+            margin: 0 5px;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .card-category {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Sidebar -->
+    {% include 'sidebar.html' %}
+    <!-- End Sidebar -->
+
+
+    <div class="main-panel">
+        {% include 'header.html' %}
+
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h3 class="fw-bold mb-3">Paramètres de Configuration</h3>
+                    {#                <ul class="breadcrumbs mb-3">#}
+                    {#                    <li class="nav-home">#}
+                    {#                        <a href="#">#}
+                    {#                            <i class="icon-home"></i>#}
+                    {#                        </a>#}
+                    {#                    </li>#}
+                    {#                    <li class="separator">#}
+                    {#                        <i class="icon-arrow-right"></i>#}
+                    {#                    </li>#}
+                    {#                    <li class="nav-item">#}
+                    {#                        <a href="#">Base</a>#}
+                    {#                    </li>#}
+                    {#                    <li class="separator">#}
+                    {#                        <i class="icon-arrow-right"></i>#}
+                    {#                    </li>#}
+                    {#                    <li class="nav-item">#}
+                    {#                        <a href="#">Sweet Alert</a>#}
+                    {#                    </li>#}
+                    {#                </ul>#}
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Modifier les Paramètres</div>
+                                <div class="card-category">
+                                    <a href="https://sweetalert.js.org/">SweetAlert</a> makes popup messages easy and pretty.
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="id_city">Département :</label>
+                                        <input type="text" id="id_city" name="departement" class="form-control" value="{{ settings.city }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_city">Ville :</label>
+                                        <input type="text" id="id_city" name="city" class="form-control" value="{{ settings.city }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_commune">Commune :</label>
+                                        <input type="text" id="id_commune" name="commune" class="form-control" value="{{ settings.commune }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_logo">Logo :</label>
+                                        {% if settings.logo %}
+                                            <img src="{{ settings.logo.url }}" alt="Logo" class="img-fluid">
+                                            <input type="file" id="id_logo" name="logo"  class="form-control mt-2">
+                                        {% else %}
+                                            <input type="file" id="id_logo" name="logo" accept="image/*" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Custom settings -->
+        {% include 'custom.html' %}
+        <!-- End Custom settings -->
+    </div>
+    <!--  All scripts  -->
+    {% include 'scripts.html' %}
+</body>

@@ -1,0 +1,265 @@
+{% load static %}
+<head>
+    <style >
+        <!--
+        body { font-family: Arial; font-size: 18.5px }
+        .pos { position: absolute; z-index: 0; left: 0; top: 0 }
+        -->
+        @media print {
+            @page {
+                margin: 0;
+            }
+            body {
+                margin: 0;
+            }
+            .button-container {
+                display: none; /* Masquer le container lors de l'impression */
+            }
+        }
+        .button-container {
+            position: absolute;
+            top: 20px; /* Ajustez la position verticale selon vos besoins */
+            right: 20px; /* Ajustez la position horizontale selon vos besoins */
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+ {% load custom_filters %}
+<div class="button-container">
+    <button class="button" onclick="window.print()">Imprimer</button>
+</div>
+<nobr><nowrap>
+    <div class="pos" id="_0:0" style="position:absolute;top:110px;left:90px">
+          <img src="{{ settings.logo.url }}" height="100" width="100" usemap="#Map"></div>
+        <div class="pos" id="_47:38" style="top:38;left:47">
+    <span id="_13.5" style=" font-family:Arial; font-size:13.5px; color:#000000">
+    DEPARTEMENT DE {{ setting.departement }}</span>
+        </div>
+        <div class="pos" id="_577:52" style="top:52;left:577">
+    <span id="_12.2" style="font-weight:bold; font-family:Arial; font-size:12.2px; color:#000000">
+    REPUBLIQUE DE COTE  D'IVOIRE</span>
+        </div>
+        <div class="pos" id="_76:60" style="top:60;left:76">
+    <span id="_13.5" style="font-weight:bold; font-family:Arial; font-size:13.5px; color:#000000">
+    COMMUNE DE {{ setting.city }}</span>
+        </div>
+        <div class="pos" id="_606:68" style="top:68;left:606">
+    <span id="_10.7" style=" font-family:Arial; font-size:10.7px; color:#000000">
+    UNION - DISCIPLINE - TRAVAIL</span>
+        </div>
+        <div class="pos" id="_72:86" style="top:86;left:72">
+    <span id="_11.3" style="font-weight:bold; font-family:Arial; font-size:11.3px; color:#000000">
+    REPUBLIQUE DE COTE  D'IVOIRE</span>
+        </div>
+        <div class="pos" id="_468:128" style="top:128;left:468">
+    <span id="_20.7" style=" font-family:Arial; font-size:20.7px; color:#000000">
+    E X T R A I T</span>
+        </div>
+        <div class="pos" id="_405:155" style="top:155;left:405">
+    <span id="_15.9" style=" font-family:Arial; font-size:15.9px; color:#000000">
+    du Registre des actes de l'Etat Civil</span>
+        </div>
+        <div class="pos" id="_459:181" style="top:181;left:459">
+    <span id="_15.9" style=" font-family:Arial; font-size:15.9px; color:#000000">
+    pour l' année<span style=" color:#ff0000"> {{ annee }}</span></span>
+        </div>
+        <div class="pos" id="_105:219" style="top:219;left:105">
+    <span id="_13.3" style="font-weight:bold; font-family:Arial; font-size:13.3px; color:#000000">
+    ETAT  CIVIL</span>
+        </div>
+        <div class="pos" id="_61:240" style="top:240;left:61">
+    <span id="_10.6" style=" font-family:Arial; font-size:10.6px; color:#000000">
+    CIRCONSCRIPTION D'ETAT CIVIL</span>
+        </div>
+        <div class="pos" id="_107:253" style="top:253;left:107">
+    <span id="_10.6" style=" font-family:Arial; font-size:10.6px; color:#000000">
+        <u> </u><u> </u><u>D</u><u>E</u><u> </u><u>{{ setting.city  }}</u></span>
+        </div>
+        <div class="pos" id="_277:249" style="top:249;left:277">
+    <span id="_15.8" style=" font-family:Arial; font-size:15.8px; color:#000000">
+    Le  <span style="font-weight:bold"> {{ birth_record.birth_date | date_to_french_string}} /°....................................</span></span>
+        </div>
+        <div class="pos" id="_41:270" style="top:270;left:41">
+    <span id="_10.6" style="font-weight:bold; font-family:Arial; font-size:10.6px; color:#000000">
+    CENTRE D'ETAT CIVIL DE {{ setting.city  }}</span>
+        </div>
+        <div class="pos" id="_277:291" style="top:291;left:277">
+    <span id="_15.8" style=" font-family:Arial; font-size:15.8px; color:#000000">
+    Est né(e) <span style="font-weight:bold; color:#ff0000"> {{ birth_record.child_first_name | upper }} </span><span style="font-weight:bold; color:#ff0000"> {{ birth_record.child_last_name | upper}}</span></span>
+        </div>
+        <div class="pos" id="_355:313" style="top:313;left:355">
+    <span id="_15.8" style="font-weight:bold; font-family:Arial; font-size:15.8px; color:#ff0000">
+        /° à {{ birth_record.birth_time | time_to_french_string }}</span>
+        </div>
+        <div class="pos" id="_355:332" style="top:332;left:355">
+    <span id="_15.8" style="font-weight:bold; font-family:Arial; font-size:15.8px; color:#ff0000">
+     ................................................................</span>
+        </div>
+        <div class="pos" id="_40:361" style="top:361;left:40">
+    <span id="_12.2" style=" font-family:Arial; font-size:12.2px; color:#000000">
+    N°.</span>
+        </div>
+        <div class="pos" id="_81:361" style="top:361;left:81">
+    <span id="_12.2" style=" font-family:Arial; font-size:12.2px; color:#ff0000">
+    {{ registre.registry_id}} du {{ registre.creation_date.day }}/{{ registre.creation_date.month }}/{{ registre.creation_date.year }}</span>
+        </div>
+        <div class="pos" id="_195:361" style="top:361;left:195">
+    <span id="_12.2" style=" font-family:Arial; font-size:12.2px; color:#000000">
+    du registre.</span>
+        </div>
+        <div class="pos" id="_277:363" style="top:363;left:277">
+    <span id="_15.7" style=" font-family:Arial; font-size:15.7px; color:#000000">
+    à   <span style="font-weight:bold"> {{ birth_record.birthplace }} /°...................................................................................</span></span>
+        </div>
+        <div class="pos" id="_102:394" style="top:394;left:102">
+    <span id="_12.2" style=" font-family:Arial; font-size:12.2px; color:#000000">
+    NAISSANCE DE</span>
+        </div>
+        <div class="pos" id="_277:399" style="top:399;left:277">
+    <span id="_15.9" style=" font-family:Arial; font-size:15.9px; color:#000000">
+    Fils   <span style="font-weight:bold"> de {{ birth_record.father | upper }}- {{ birth_record.father_profession | upper }} </span><span style="font-weight:bold"> /°. .</span></span>
+        </div>
+        <div class="pos" id="_44:415" style="top:415;left:44">
+    <span id="_15.2" style=" font-family:Arial; font-size:15.2px; color:#000000">
+    .................................................... </span>
+        </div>
+        <div class="pos" id="_44:432" style="top:432;left:44">
+    <span id="_16.5" style=" font-family:Arial; font-size:16.5px; color:#ff0000">
+    {{ birth_record.child_first_name | upper }} </span>
+        </div>
+        <div class="pos" id="_278:429" style="top:429;left:278">
+    <span id="_15.8" style=" font-family:Arial; font-size:15.8px; color:#000000">
+    et de   <span style="font-weight:bold"> {{ birth_record.mother | upper }}- {{ birth_record.mother_profession | upper }} </span><span style="font-weight:bold"> /°...............</span></span>
+        </div>
+        <div class="pos" id="_44:451" style="top:451;left:44">
+    <span id="_14.5" style="font-weight:bold; font-family:Arial; font-size:14.5px; color:#000000">
+    {{ birth_record.child_last_name | upper }} /°...</span>
+        </div>
+        <div class="pos" id="_44:469" style="top:469;left:44">
+    <span id="_15.2" style="font-weight:bold; font-family:Arial; font-size:15.2px; color:#000000">
+    .........................................</span>
+        </div>
+        <div class="pos" id="_44:485" style="top:485;left:44">
+    <span id="_12.8" style=" font-family:Arial; font-size:12.8px; color:#000000">
+    ......X..................................................</span>
+        </div>
+        <div class="pos" id="_44:500" style="top:500;left:44">
+    <span id="_12.8" style=" font-family:Arial; font-size:12.8px; color:#000000">
+    .......X.................................................</span>
+        </div>
+        <div class="pos" id="_44:515" style="top:515;left:44">
+    <span id="_12.8" style=" font-family:Arial; font-size:12.8px; color:#000000">
+    .......X.................................................</span>
+        </div>
+        <div class="pos" id="_44:542" style="top:542;left:44">
+    <span id="_15.1" style=" font-family:Arial; font-size:15.1px; color:#000000">
+    ............X......................................</span>
+        </div>
+        <div class="pos" id="_44:562" style="top:562;left:44">
+    <span id="_15.1" style=" font-family:Arial; font-size:15.1px; color:#000000">
+    ...............X...................................</span>
+        </div>
+        <div class="pos" id="_44:586" style="top:586;left:44">
+    <span id="_15.1" style=" font-family:Arial; font-size:15.1px; color:#000000">
+    ..................X................................</span>
+        </div>
+        <div class="pos" id="_44:611" style="top:611;left:44">
+    <span id="_15.1" style=" font-family:Arial; font-size:15.1px; color:#000000">
+    ......................X............................</span>
+        </div>
+        <div class="pos" id="_44:636" style="top:636;left:44">
+    <span id="_15.1" style=" font-family:Arial; font-size:15.1px; color:#000000">
+    ..........................X........................</span>
+        </div>
+        <div class="pos" id="_127:651" style="top:651;left:127">
+    <span id="_11.0" style=" font-family:Arial; font-size:11.0px; color:#000000">
+    E. 18</span>
+        </div>
+        <div class="pos" id="_277:716" style="top:716;left:277">
+    <span id="_18.7" style=" font-family:Arial; font-size:18.7px; color:#000000">
+    MENTIONS (éventuellement) :</span>
+        </div>
+        <div class="pos" id="_40:759" style="top:759;left:40">
+    <span id="_14.7" style=" font-family:Arial; font-size:14.7px; color:#000000">
+    Marié le...........................................................................................à.........<span style="font-weight:bold;font-style:italic; font-family:Times New Roman; color:#ff0000"> N.</span> ......................................................</span>
+        </div>
+        <div class="pos" id="_40:794" style="top:794;left:40">
+    <span id="_14.7" style=" font-family:Arial; font-size:14.7px; color:#000000">
+    Avec................................................................................................................<span style="font-weight:bold;font-style:italic; font-family:Times New Roman; color:#ff0000"> E</span></span>
+        </div>
+        <div class="pos" id="_562:794" style="top:794;left:562">
+    <span id="_14.7" style=" font-family:Arial; font-size:14.7px; color:#000000">
+    .................................................. </span>
+        </div>
+        <div class="pos" id="_40:825" style="top:825;left:40">
+    <span id="_14.7" style=" font-family:Arial; font-size:14.7px; color:#000000">
+    Mariage dissous par déclaration de divorce en date du........................................<span style="font-weight:bold;font-style:italic; font-family:Times New Roman; color:#ff0000"> A</span></span>
+        </div>
+        <div class="pos" id="_583:825" style="top:825;left:583">
+    <span id="_14.7" style=" font-family:Arial; font-size:14.7px; color:#000000">
+    ............................................</span>
+        </div>
+        <div class="pos" id="_40:858" style="top:858;left:40">
+    <span id="_14.7" style=" font-family:Arial; font-size:14.7px; color:#000000">
+    ..................................................................................................................................<span style="font-weight:bold;font-style:italic; font-family:Times New Roman; color:#ff0000"> N.</span> ....................................... </span>
+        </div>
+        <div class="pos" id="_40:888" style="top:888;left:40">
+    <span id="_14.7" style=" font-family:Arial; font-size:14.7px; color:#000000">
+    Décédé(e)  le ........................à.....................................................................................<span style="font-weight:bold;font-style:italic; font-family:Times New Roman; color:#ff0000"> T.</span> ...................................</span>
+        </div>
+        <div class="pos" id="_61:919" style="top:919;left:61">
+    <span id="_14.7" style=" font-family:Arial; font-size:14.7px; color:#000000">
+    Certifié le présent extrait conforme aux indications portées au registre.</span>
+        </div>
+        <div class="pos" id="_494:954" style="top:954;left:494">
+    <span id="_13.4" style=" font-family:Arial; font-size:13.4px; color:#000000">
+    Délivré à NIOFOIN le 05/05/2016 11:11:02</span>
+        </div>
+        <div class="pos" id="_637:972" style="top:972;left:637">
+    <span id="_12.1" style=" font-family:Times New Roman; font-size:12.1px; color:#000000">
+    L'Officier de l'Etat Civil</span>
+        </div>
+        <div class="pos" id="_644:990" style="top:990;left:644">
+    <span id="_12.1" style=" font-family:Times New Roman; font-size:12.1px; color:#000000">
+    L'agent de l'Etat Civil</span>
+        </div>
+        <div class="pos" id="_509:1009" style="top:1009;left:509">
+    <span id="_12.1" style=" font-family:Arial; font-size:12.1px; color:#000000">
+    Sceau</span>
+        </div>
+        <div class="pos" id="_253:1021" style="top:1021;left:253">
+    <span id="_12.1" style=" font-family:Times New Roman; font-size:12.1px; color:#000000">
+    Timbre  fiscal</span>
+        </div>
+        <div class="pos" id="_674:1020" style="top:1020;left:674">
+    <span id="_12.1" style=" font-family:Times New Roman; font-size:12.1px; color:#000000">
+    Signature</span>
+        </div>
+</nowrap>
+
+</nobr>
+
+
+<script>
+    window.onload = function() {
+
+        window.print();
+    };
+</script>
+
+
+
+</body>

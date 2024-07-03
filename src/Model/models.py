@@ -128,3 +128,26 @@ class Request(models.Model):
 
     def __str__(self):
         return self.message
+
+
+class Settings(models.Model):
+    departement = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    commune = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='logos/')
+
+    # Méthode pour assurer qu'il n'y a qu'une seule instance
+    @classmethod
+    def get_settings(cls):
+        # Renvoyer toujours la première instance, ou créer une nouvelle si aucune n'existe
+        settings, created = cls.objects.get_or_create(pk=1)
+        return settings
+
+    def save(self, *args, **kwargs):
+        # Écraser la première instance à chaque sauvegarde
+        self.pk = 1
+        super(Settings, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        # Empêcher la suppression de l'instance unique
+        pass
