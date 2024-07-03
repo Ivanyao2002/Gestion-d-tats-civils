@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', accueil, name='index'),
     path('Birth_Certificate/', include('Birth_Certificate.urls')),
+    path('acts-request/', include('acts_request.urls')),
 
 ]

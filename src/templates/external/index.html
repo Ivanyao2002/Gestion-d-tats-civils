@@ -1,0 +1,30 @@
+<!doctype html>
+<html data-bs-theme="light" lang="fr-FR" dir="ltr">
+    <head>
+        {% include 'external/head.html' %}
+        <title>Mairie d'Assinie | Demande d'actes en ligne</title>
+    </head>
+    <body>
+        <!-- ================--><!--    Main Content--><!-- ===================-->
+        <main class="main" id="top">
+            <div class="content">
+                <nav class="navbar navbar-expand-md fixed-top" id="navbar" data-navbar-soft-on-scroll="data-navbar-soft-on-scroll">
+                    {% include 'external/navbar.html' %}
+                </nav>
+
+                <div data-bs-target="#navbar" data-bs-spy="scroll" tabindex="0">
+                    {% include 'external/container.html' %}
+                </div>
+
+                <button class="btn scroll-to-top text-white rounded-circle d-flex justify-content-center align-items-center bg-primary" data-scroll-top="data-scroll-top"><span class="uil uil-angle-up"></span></button>
+
+                <footer class="pt-7 pt-lg-8">
+                    {% include 'external/footer.html' %}
+                </footer>
+            </div>
+        </main>
+        <!-- ================--><!--    End of Main Content--><!-- ===================-->
+        <!--  All scripts  -->
+        {% include 'external/scripts.html' %}
+    </body>
+</html>

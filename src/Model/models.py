@@ -117,15 +117,14 @@ class Divorce(models.Model):
 
 
 class Request(models.Model):
-    registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
     request_id = models.AutoField(primary_key=True)
     last_name = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=20)
-    email = models.EmailField()
-    subject = models.CharField(max_length=200)
+    phone = models.CharField(max_length=20, unique=True)
+    email = models.EmailField(max_length=100, unique=True)
     message = models.TextField()
-    creation_date = models.DateTimeField(default=timezone.now)
+    file = models.FileField(upload_to='Fichier_demande/')
+    creation_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.subject
+        return self.message
