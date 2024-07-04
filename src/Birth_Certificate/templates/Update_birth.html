@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    <title>Modifier un extrait de naissance</title>
+</head>
+<body>
+<div class="wrapper">
+    {% include 'sidebar.html' %}
+
+    <div class="main-panel">
+        {% include 'header.html' %}
+
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h3 class="fw-bold mb-3">Modifier un Extrait de Naissance</h3>
+                    <ul class="breadcrumbs mb-3">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Actes</a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Extraits de Naissance</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="card-title">Modifier l'Extrait de Naissance</div>
+                                    <button class="btn btn-primary btn-round ms-auto" id="listButton">
+                                        <i class="icon-list"></i>
+                                        Liste des Extraits
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form method="POST" id="birth-form" action="{% url 'Birth_Certificate:edit_birth_certificate' birth_certificate.id %}" target="_blank ">
+                                    {% csrf_token %}
+                                    <div class="form-group row">
+                                        <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="registry" name="registry" value="{{ birth_certificate.registry.registry_id }}" disabled>
+                                            <input type="hidden" name="registry" value="{{ birth_certificate.registry.id }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="birth_date" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ birth_certificate.birth_date  }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="birth_time" class="col-lg-3 col-md-3 col-sm-4 text-end">Heure de naissance :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="time" class="form-control" id="birth_time" name="birth_time" value="{{ birth_certificate.birth_time }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="child_last_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom de l'enfant :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="child_last_name" name="child_last_name" value="{{ birth_certificate.child_first_name }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="child_first_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Prénom de l'enfant :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="child_first_name" name="child_first_name" value="{{ birth_certificate.child_last_name }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="birthplace" class="col-lg-3 col-md-3 col-sm-4 text-end">Lieu de naissance :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="birthplace" name="birthplace" value="{{ birth_certificate.birthplace }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="father" class="col-lg-3 col-md-3 col-sm-4 text-end">Père :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="father" name="father" value="{{ birth_certificate.father }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="father_profession" class="col-lg-3 col-md-3 col-sm-4 text-end">Profession du père :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="father_profession" name="father_profession" value="{{ birth_certificate.father_profession }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="mother" class="col-lg-3 col-md-3 col-sm-4 text-end">Mère :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="mother" name="mother" value="{{ birth_certificate.mother }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="mother_profession" class="col-lg-3 col-md-3 col-sm-4 text-end">Profession de la Mère :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="mother_profession" name="mother_profession" value="{{ birth_certificate.mother_profession }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <div class="form-group row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12"></div>
+                                            <div class="col-lg-4 col-md-9 col-sm-12">
+                                                <button type="submit" id="birthbuttom" class="btn btn-success">Modifier l'Extrait</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'footer.html' %}
+    </div>
+
+    {% include 'custom.html' %}
+</div>
+{% include 'scripts.html' %}
+
+<script>
+    let today = new Date();
+    let date = String(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let year = today.getFullYear();
+
+    today = year + '-' + month + '-' + date;
+
+    // Mettre le minimum de l'input des dates
+    document.getElementById("birth_date").max = today;
+
+    $(document).ready(function () {
+        $('#listButton').click(function () {
+            window.location.href = "{% url 'Birth_Certificate:birth_list' %}";
+        });
+    });
+    document.getElementById('birth-form').addEventListener('submit', function(event) {
+        // Récupère le formulaire
+        var form = this;
+
+        // Récupère l'action du formulaire
+        var formAction = form.getAttribute('action');
+
+        // Récupère le token CSRF
+        var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        // Effectue la soumission du formulaire via fetch API
+        fetch(formAction, {
+            method: form.method,
+            body: new FormData(form),
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        }).then(response => {
+            if (response.ok) {
+                // Réinitialise le formulaire après une soumission réussie
+                form.reset();
+
+                // Redirige vers la liste des extraits
+                window.location.href = "{% url 'Birth_Certificate:birth_list' %}";
+
+                // Redirige vers la page d'impression
+                window.open("{% url 'Birth_Certificate:print_birth_certificate' birth_certificate.id %}", '_blank');
+            } else {
+                // Gère les erreurs si nécessaire
+                console.log('Erreur lors de la soumission du formulaire');
+            }
+        }).catch(error => {
+            console.error('Erreur:', error);
+        });
+    });
+</script>
+</body>
+</html>

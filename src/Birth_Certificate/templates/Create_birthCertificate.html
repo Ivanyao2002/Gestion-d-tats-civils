@@ -44,8 +44,15 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title">Nouvel Extrait de Naissance</div>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-title">Nouvel Extrait de Naissance</div>
+                                    <button class="btn btn-primary btn-round ms-auto"  id="listButton" >
+                                        <i class="icon-list"></i>
+                                        Listes des Extraits
+                                    </button>
+                                </div>
                             </div>
+
                             <div class="card-body">
                                 <form method="POST" id="birth-form" action="{% url 'Birth_Certificate:Creation_extrait' %}" target="_blank" >
                                     {% csrf_token %}
@@ -96,9 +103,9 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="child_last_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom de l'enfant :</label>
+                                        <label for="child_first_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom de l'enfant :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="text" class="form-control" id="child_last_name" name="child_first_name" required>
+                                            <input type="text" class="form-control" id="child_first_name" name="child_first_name" required>
                                             {% if form.child_last_name.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.child_last_name.errors %}
@@ -110,9 +117,9 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="child_first_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Prénom de l'enfant :</label>
+                                        <label for="child_last_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Prénom de l'enfant :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="text" class="form-control" id="child_first_name" name="child_last_name" required>
+                                            <input type="text" class="form-control" id="child_last_name" name="child_last_name" required>
                                             {% if form.child_first_name.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.child_first_name.errors %}
@@ -226,44 +233,53 @@
 
 {# Enregistrement reussi ou erreur #}
 <script>
-    {% if messages%}
-        {% for messages in messages %}
-            $(document).ready(function() {
-                $('#successModal').modal('show');
-            });
-        {% endfor %}
-    {% endif %}
-    {% if form.errors %}
-        $(document).ready(function() {
-            $('#errorModal').modal('show');
+
+
+    let today = new Date();
+    let date = String(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let year = today.getFullYear();
+
+    today = year + '-' + month + '-' + date;
+
+    // Mettre le minimum de l'input des dates
+    document.getElementById("birth_date").max = today;
+
+
+    {#document.getElementById('birth-form').addEventListener('submit', function(event) {#}
+    {#    event.preventDefault(); // Empêche la soumission par défaut#}
+    {##}
+    {#    // Récupère le formulaire#}
+    {#    var form = this;#}
+    {##}
+    {#    // Effectue la soumission du formulaire via fetch API ou XMLHttpRequest#}
+    {#    fetch(form.action, {#}
+    {#        method: form.method,#}
+    {#        body: new FormData(form),#}
+    {#        headers: {#}
+    {#            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value#}
+    {#        }#}
+    {#    }).then(response => {#}
+    {#        if (response.ok) {#}
+    {#            // Réinitialise le formulaire après une soumission réussie#}
+    {#            form.reset();#}
+    {##}
+    {#            // Redirige vers la page d'impression#}
+    {#           #}
+    {#        } else {#}
+    {#            // Gère les erreurs si nécessaire#}
+    {#            console.log('Erreur lors de la soumission du formulaire');#}
+    {#        }#}
+    {#    }).catch(error => {#}
+    {#        console.error('Erreur:', error);#}
+    {#    });#}
+    {#})#}
+</script>
+<script>
+    $(document).ready(function () {
+        $('#listButton').click(function () {
+            window.location.href = "{% url 'Birth_Certificate:birth_list' %}";
         });
-    {% endif %}
-
-
-    document.getElementById('birth-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Empêche la soumission par défaut
-
-            // Récupère le formulaire
-            var form = this;
-
-            // Effectue la soumission du formulaire via fetch API ou XMLHttpRequest
-            fetch(form.action, {
-                method: form.method,
-                body: new FormData(form),
-                headers: {
-                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-                }
-            }).then(response => {
-                if (response.ok) {
-                    // Réinitialise le formulaire après une soumission réussie
-                    form.reset();
-                } else {
-                    // Gère les erreurs si nécessaire
-                    console.log('Erreur lors de la soumission du formulaire');
-                }
-            }).catch(error => {
-                console.error('Erreur:', error);
-            });
-            }
+    });
 </script>
 </html>

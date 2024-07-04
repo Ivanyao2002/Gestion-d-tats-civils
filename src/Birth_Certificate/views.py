@@ -4,11 +4,11 @@ from docx2pdf import convert
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.conf import settings
-from .forms import BirthForm
+from .forms import BirthForm, BirthEditForm
 from Model.models import Birth, Registry, Settings
 from django.utils import timezone
 from django.contrib import messages
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 import datetime
 
 
@@ -34,7 +34,7 @@ def create_birth(request):
             # return redirect(reverse('print_birth_certificate', birth_record_id=birth_record.id))  # Assurez-vous que cette URL existe
 
             # Stocker birth_record dans la session
-            form = BirthForm()
+
 
             # Rediriger vers une autre vue qui utilisera beta.html
             return redirect('Birth_Certificate:print_birth_certificate', birth_record_id=birth_record.id)
@@ -48,7 +48,49 @@ def create_birth(request):
 
     registries = Registry.objects.all()
     return render(request, 'Create_birthCertificate.html',
-                  {'form': form, 'registries': registries, })
+                  {'form': form, 'registries': registries })
+
+
+def birth_list(request):
+    births = Birth.objects.all()
+    return render(request, 'List_birth.html', {'births': births})
+
+
+def edit_birth_certificate(request, pk):
+    birth_certificate = get_object_or_404(Birth, pk=pk)
+    if request.method == 'POST':
+        form = BirthEditForm(request.POST, instance=birth_certificate)
+        if form.is_valid():
+            form.save()
+            return redirect('Birth_Certificate:print_birth_certificate', birth_record_id=birth_certificate.id)
+    else:
+        form = BirthEditForm(instance=birth_certificate, initial={
+            'birth_date': birth_certificate.birth_date.strftime(
+                '%d-%m-%Y') if birth_certificate.birth_date else None
+        })
+    return render(request, 'update_birth.html', {'form': form, 'birth_certificate': birth_certificate})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # def generate_birth_certificate_pdf(birth):
 #     try:
