@@ -43,20 +43,21 @@
 </div>
 <nobr><nowrap>
     <div class="pos" id="_0:0" style="position:absolute;top:110px;left:90px">
-          <img src="{{ settings.logo.url }}" height="100" width="100" usemap="#Map"></div>
+          <img src="{{ setting.logo.url }}" height="100" width="100" usemap="#Map">
+    </div>
         <div class="pos" id="_47:38" style="top:38;left:47">
     <span id="_13.5" style=" font-family:Arial; font-size:13.5px; color:#000000">
-    DEPARTEMENT DE {{ setting.departement }}</span>
+    DEPARTEMENT DE {{ setting.departement | upper }}</span>
         </div>
-        <div class="pos" id="_577:52" style="top:52;left:577">
+        <div class="pos" id="_577:52" style="top:52px;left:577px">
     <span id="_12.2" style="font-weight:bold; font-family:Arial; font-size:12.2px; color:#000000">
     REPUBLIQUE DE COTE  D'IVOIRE</span>
         </div>
         <div class="pos" id="_76:60" style="top:60;left:76">
     <span id="_13.5" style="font-weight:bold; font-family:Arial; font-size:13.5px; color:#000000">
-    COMMUNE DE {{ setting.city }}</span>
+    COMMUNE DE {{ setting.city | upper }}</span>
         </div>
-        <div class="pos" id="_606:68" style="top:68;left:606">
+        <div class="pos" id="_606:68" style="top:68px;left:606px">
     <span id="_10.7" style=" font-family:Arial; font-size:10.7px; color:#000000">
     UNION - DISCIPLINE - TRAVAIL</span>
         </div>
@@ -86,7 +87,7 @@
         </div>
         <div class="pos" id="_107:253" style="top:253;left:107">
     <span id="_10.6" style=" font-family:Arial; font-size:10.6px; color:#000000">
-        <u> </u><u> </u><u>D</u><u>E</u><u> </u><u>{{ setting.city  }}</u></span>
+        <u> </u><u> </u><u>D</u><u>E</u><u> </u><u>{{ setting.city | upper  }}</u></span>
         </div>
         <div class="pos" id="_277:249" style="top:249;left:277">
     <span id="_15.8" style=" font-family:Arial; font-size:15.8px; color:#000000">
@@ -94,7 +95,7 @@
         </div>
         <div class="pos" id="_41:270" style="top:270;left:41">
     <span id="_10.6" style="font-weight:bold; font-family:Arial; font-size:10.6px; color:#000000">
-    CENTRE D'ETAT CIVIL DE {{ setting.city  }}</span>
+    CENTRE D'ETAT CIVIL DE {{ setting.city | upper }}</span>
         </div>
         <div class="pos" id="_277:291" style="top:291;left:277">
     <span id="_15.8" style=" font-family:Arial; font-size:15.8px; color:#000000">

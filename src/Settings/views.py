@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from Model.models import Settings
 from .forms import SettingsForm  # Assurez-vous d'avoir un formulaire correspondant
 
@@ -13,7 +13,7 @@ def setting(request):
 
         if form.is_valid():
             form.save()  # Sauvegarder les données mises à jour dans la base de données
-            return redirect('setting')  # Rediriger vers la même page pour rafraîchir les données
+            return redirect('Settings:settings')  # Rediriger vers la même page pour rafraîchir les données
     else:
         form = SettingsForm(instance=settings)  # Pré-remplir le formulaire avec les données existantes
 

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Model',
     'Birth_Certificate',
     'acts_request',
+    'Settings'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mairie_db',
         'USER': 'postgres',
-        'PASSWORD': 'ivan',
+        'PASSWORD': 'Pipi1306',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -127,7 +128,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-MEDIA_URL = '/media/'
+MEDIA_URL = '/medias/'
 MEDIA_ROOT = BASE_DIR / 'medias'
 
 # Default primary key field type

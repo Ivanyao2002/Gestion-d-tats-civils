@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import accueil
+from django.conf.urls.static import static
+from gestion_etats_civils import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +27,4 @@ urlpatterns = [
     path('Settings/', include('Settings.urls')),
     path('acts-request/', include('acts_request.urls')),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
