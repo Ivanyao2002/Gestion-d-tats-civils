@@ -40,7 +40,7 @@
                                     <div class="form-group row">
                                         <label for="date" class="col-lg-3 col-md-3 col-sm-4 text-end">Date du mariage :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="date" class="form-control" id="date" name="date" value="{{ marriage.date }}" required>
+                                            <input type="date" class="form-control" id="date" name="date" value="{{ marriage.date |date:'Y-m-d' }}" required>
                                             {% if form.date.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.date.errors %}

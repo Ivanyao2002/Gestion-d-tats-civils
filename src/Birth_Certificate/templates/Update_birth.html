@@ -62,7 +62,7 @@
                                     <div class="form-group row">
                                         <label for="birth_date" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ birth_certificate.birth_date  }}" required>
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{% if birth_certificate.birth_date %}{{ birth_certificate.birth_date|date:'Y-m-d' }}{% endif %}" required>
                                         </div>
                                     </div>
 
