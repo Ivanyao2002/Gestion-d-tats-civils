@@ -1,8 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     {% include "head.html" %}
-    <title>Notifications - Kaiadmin Bootstrap 5 Admin Dashboard</title>
+    <title>Création d'extrait de naissance</title>
 
 </head>
 <body>
@@ -15,198 +16,206 @@
     <div class="main-panel">
         {% include 'header.html' %}
 
-     <div class="container">
-    <div class="page-inner">
-        <div class="page-header">
-            <h3 class="fw-bold mb-3">Créer un Extrait de Naissance</h3>
-            <ul class="breadcrumbs mb-3">
-                <li class="nav-home">
-                    <a href="#">
-                        <i class="icon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Actes</a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Extraits de Naissance</a>
-                </li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Nouvel Extrait de Naissance</div>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="{% url 'Birth_Certificate:Creation_extrait' %}">
-                            {% csrf_token %}
-                            <div class="form-group row">
-                                <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
-                                <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <select class="form-select input-fixed" id="registry" name="registry">
-                                        {% for registry in registries %}
-                                            <option value="{{ registry.id }}">{{ registry.registry_id }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    {% if form.registry.errors %}
-                                        <ul class="text-danger">
-                                            {% for error in form.registry.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h3 class="fw-bold mb-3">Créer un Extrait de Naissance</h3>
+                    <ul class="breadcrumbs mb-3">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Actes</a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Extraits de Naissance</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="card-title">Nouvel Extrait de Naissance</div>
+                                    <button class="btn btn-primary btn-round ms-auto"  id="listButton" >
+                                        <i class="icon-list"></i>
+                                        Listes des Extraits
+                                    </button>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="birth_date" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance :</label>
-                                <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <input type="date" class="form-control" id="birth_date" name="birth_date" required>
-                                    {% if form.birth_date.errors %}
-                                        <ul class="text-danger">
-                                            {% for error in form.birth_date.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="birth_time" class="col-lg-3 col-md-3 col-sm-4 text-end">Heure de naissance :</label>
-                                <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <input type="time" class="form-control" id="birth_time" name="birth_time" required>
-                                    {% if form.birth_time.errors %}
-                                        <ul class="text-danger">
-                                            {% for error in form.birth_time.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="child_last_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom de l'enfant :</label>
-                                <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" id="child_last_name" name="child_last_name" required>
-                                    {% if form.child_last_name.errors %}
-                                        <ul class="text-danger">
-                                            {% for error in form.child_last_name.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="child_first_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Prénom de l'enfant :</label>
-                                <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" id="child_first_name" name="child_first_name" required>
-                                    {% if form.child_first_name.errors %}
-                                        <ul class="text-danger">
-                                            {% for error in form.child_first_name.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="birthplace" class="col-lg-3 col-md-3 col-sm-4 text-end">Lieu de naissance :</label>
-                                <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" id="birthplace" name="birthplace" required>
-                                    {% if form.birthplace.errors %}
-                                        <ul class="text-danger">
-                                            {% for error in form.birthplace.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="father" class="col-lg-3 col-md-3 col-sm-4 text-end">Père :</label>
-                                <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" id="father" name="father" required>
-                                    {% if form.father.errors %}
-                                        <ul class="text-danger">
-                                            {% for error in form.father.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="father_profession" class="col-lg-3 col-md-3 col-sm-4 text-end">Profession du père :</label>
-                                <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" id="father_profession" name="father_profession" required>
-                                    {% if form.father_profession.errors %}
-                                        <ul class="text-danger">
-                                            {% for error in form.father_profession.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="mother" class="col-lg-3 col-md-3 col-sm-4 text-end">Mère :</label>
-                                <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" id="mother" name="mother" required>
-                                    {% if form.mother.errors %}
-                                        <ul class="text-danger">
-                                            {% for error in form.mother.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="mother_profession" class="col-lg-3 col-md-3 col-sm-4 text-end">Profession de la Mère :</label>
-                                <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" id="mother_profession" name="mother_profession" required>
-                                    {% if form.mother_profession.errors %}
-                                        <ul class="text-danger">
-                                            {% for error in form.mother_profession.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="card-footer">
-                                <div class="form-group row">
-                                    <div class="col-lg-3 col-md-3 col-sm-12"></div>
-                                    <div class="col-lg-4 col-md-9 col-sm-12">
-                                        <button type="submit" class="btn btn-success">Créer l'Extrait</button>
+                            <div class="card-body">
+                                <form method="POST" id="birth-form" action="{% url 'Birth_Certificate:Creation_extrait' %}" target="_blank" >
+                                    {% csrf_token %}
+                                    <div class="form-group row">
+                                        <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <select class="form-select input-fixed" id="registry" name="registry">
+                                                {% for registry in registries %}
+                                                    <option value="{{ registry.id }}">{{ registry.registry_id }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            {% if form.registry.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.registry.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
                                     </div>
-                                </div>
+
+                                    <div class="form-group row">
+                                        <label for="birth_date" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" required>
+                                            {% if form.birth_date.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.birth_date.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="birth_time" class="col-lg-3 col-md-3 col-sm-4 text-end">Heure de naissance :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="time" class="form-control" id="birth_time" name="birth_time" required>
+                                            {% if form.birth_time.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.birth_time.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="child_first_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom de l'enfant :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="child_first_name" name="child_first_name" required>
+                                            {% if form.child_last_name.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.child_last_name.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="child_last_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Prénom de l'enfant :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="child_last_name" name="child_last_name" required>
+                                            {% if form.child_first_name.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.child_first_name.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="birthplace" class="col-lg-3 col-md-3 col-sm-4 text-end">Lieu de naissance :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="birthplace" name="birthplace" required>
+                                            {% if form.birthplace.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.birthplace.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="father" class="col-lg-3 col-md-3 col-sm-4 text-end">Père :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="father" name="father" required>
+                                            {% if form.father.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.father.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="father_profession" class="col-lg-3 col-md-3 col-sm-4 text-end">Profession du père :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="father_profession" name="father_profession" required>
+                                            {% if form.father_profession.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.father_profession.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="mother" class="col-lg-3 col-md-3 col-sm-4 text-end">Mère :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="mother" name="mother" required>
+                                            {% if form.mother.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.mother.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="mother_profession" class="col-lg-3 col-md-3 col-sm-4 text-end">Profession de la Mère :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="mother_profession" name="mother_profession" required>
+                                            {% if form.mother_profession.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.mother_profession.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <div class="form-group row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12"></div>
+                                            <div class="col-lg-4 col-md-9 col-sm-12">
+                                                <button type="submit" id="birth-form"  class="btn btn-success">Créer l'Extrait</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
 
 
 
@@ -221,4 +230,56 @@
 <!--  All scripts  -->
 {% include 'scripts.html' %}
 </body>
+
+{# Enregistrement reussi ou erreur #}
+<script>
+
+
+    let today = new Date();
+    let date = String(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let year = today.getFullYear();
+
+    today = year + '-' + month + '-' + date;
+
+    // Mettre le minimum de l'input des dates
+    document.getElementById("birth_date").max = today;
+
+
+    {#document.getElementById('birth-form').addEventListener('submit', function(event) {#}
+    {#    event.preventDefault(); // Empêche la soumission par défaut#}
+    {##}
+    {#    // Récupère le formulaire#}
+    {#    var form = this;#}
+    {##}
+    {#    // Effectue la soumission du formulaire via fetch API ou XMLHttpRequest#}
+    {#    fetch(form.action, {#}
+    {#        method: form.method,#}
+    {#        body: new FormData(form),#}
+    {#        headers: {#}
+    {#            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value#}
+    {#        }#}
+    {#    }).then(response => {#}
+    {#        if (response.ok) {#}
+    {#            // Réinitialise le formulaire après une soumission réussie#}
+    {#            form.reset();#}
+    {##}
+    {#            // Redirige vers la page d'impression#}
+    {#           #}
+    {#        } else {#}
+    {#            // Gère les erreurs si nécessaire#}
+    {#            console.log('Erreur lors de la soumission du formulaire');#}
+    {#        }#}
+    {#    }).catch(error => {#}
+    {#        console.error('Erreur:', error);#}
+    {#    });#}
+    {#})#}
+</script>
+<script>
+    $(document).ready(function () {
+        $('#listButton').click(function () {
+            window.location.href = "{% url 'Birth_Certificate:birth_list' %}";
+        });
+    });
+</script>
 </html>
