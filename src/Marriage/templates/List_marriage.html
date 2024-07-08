@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     {% include "head.html" %}
-    <title>Liste des extraits</title>
+    <title>Liste des actes de mariage</title>
 
 </head>
 <body>
@@ -19,7 +19,7 @@
         <div class="container">
             <div class="page-inner">
                 <div class="page-header">
-                    <h3 class="fw-bold mb-3">Liste des Extraits de Naissance</h3>
+                    <h3 class="fw-bold mb-3">Liste des Actes de Mariage</h3>
                     <ul class="breadcrumbs mb-3">
                         <li class="nav-home">
                             <a href="#">
@@ -36,7 +36,7 @@
                             <i class="fas fa-angle-right"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Liste des Extraits</a>
+                            <a href="#">Liste des Actes</a>
                         </li>
                     </ul>
                 </div>
@@ -45,10 +45,10 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex align-items-center">
-                                    <h4 class="card-title">Extraits de Naissance</h4>
+                                    <h4 class="card-title">Actes de Mariage</h4>
                                     <button class="btn btn-primary btn-round ms-auto"  id="addButton" >
                                         <i class="fa fa-plus"></i>
-                                        Ajouter Extrait
+                                        Ajouter Acte de mariage
                                     </button>
                                 </div>
                             </div>
@@ -60,37 +60,35 @@
                                         <thead>
                                         <tr>
                                             <th>Registre</th>
-                                            <th>Nom</th>
-                                            <th>Date de Naissance</th>
-                                            <th>Lieu de Naissance</th>
+                                            <th>Marié</th>
+                                            <th>Mariée</th>
                                             <th style="width: 10%">Action</th>
                                         </tr>
                                         </thead>
                                         <tfoot>
                                         <tr>
                                             <th>Registre</th>
-                                            <th>Nom</th>
-                                            <th>Date de Naissance</th>
-                                            <th>Lieu de Naissance</th>
+                                            <th>Marié</th>
+                                            <th>Mariée</th>
                                             <th>Action</th>
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        {% for birth in births %}
+                                        {% for marriage in marriages %}
                                             <tr>
-                                                <td>{{ birth.registry.registry_id }} du {{ birth.registry.creation_date | date:"d/m/Y"}} </td>
-                                                <td>{{ birth.child_first_name | upper}} {{ birth.child_last_name | upper}}</td>
-                                                <td>{{ birth.birth_date }}</td>
-                                                <td>{{ birth.birthplace }}</td>
+                                                <td>{{ marriage.registry.registry_id }} du {{ marriage.registry.creation_date | date:"d/m/Y"}} </td>
+                                                <td>{{ marriage.groom_first_name | upper}} {{ marriage.groom_last_name | upper}}</td>
+                                                <td>{{ marriage.bride_first_name | upper}} {{ marriage.bride_last_name | upper}}</td>
+
                                                 <td>
                                                     <div class="form-button-action">
                                                         <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                            <a href="{% url 'Birth_Certificate:edit_birth_certificate' birth.id  %}">
+                                                            <a href="{% url 'Marriage:edit_marriage' marriage.id  %}">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
                                                         </button>
                                                         <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                            <a href="{% url 'Birth_Certificate:print_birth_certificate' birth.id  %}" target="_blank">
+                                                            <a href="{% url 'Marriage:print_marriage_certificate' marriage.id  %}" target="_blank">
                                                                 <i class="icon-printer"></i>
                                                             </a>
                                                         </button>
@@ -128,7 +126,7 @@
         var action = '<td> <div class="form-button-action"> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
         $('#addButton').click(function () {
-            window.location.href = "{% url 'Birth_Certificate:Creation_extrait' %}";
+            window.location.href = "{% url 'Marriage:create_marriage' %}";
         });
     });
 </script>

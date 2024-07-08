@@ -44,22 +44,26 @@ class Registry(models.Model):
 
 class Marriage(models.Model):
     registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
-    marriage_location = models.CharField(max_length=100)
-    registration_date = models.DateField()
     groom_first_name = models.CharField(max_length=100)
     groom_last_name = models.CharField(max_length=100)
     groom_birthplace = models.CharField(max_length=100)
     groom_birthdate = models.DateField()
-    groom_profession = models.CharField(max_length=100)
-    groom_address = models.CharField(max_length=200)
-    marriage_register = models.CharField(max_length=100)
-    witness1 = models.CharField(max_length=100)
-    witness2 = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to='images/')
+    groom_father = models.CharField(max_length=100)
+    groom_mother = models.CharField(max_length=200)
+    groom_domicile = models.CharField(max_length=200)
+    bride_first_name = models.CharField(max_length=100)
+    bride_last_name = models.CharField(max_length=100)
+    bride_birthplace = models.CharField(max_length=100)
+    bride_birthdate = models.DateField()
+    bride_father = models.CharField(max_length=100)
+    bride_mother = models.CharField(max_length=200)
+    bride_domicile = models.CharField(max_length=200)
+    date = models.DateField()
+    hours = models.TimeField()
     creation_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f'Marriage between {self.groom_last_name} and {self.groom_first_name}'
+        return f'Marriage between {self.groom_last_name}  {self.groom_first_name} and  {self.bride_last_name}  {self.bride_first_name}'
 
 
 class Death(models.Model):

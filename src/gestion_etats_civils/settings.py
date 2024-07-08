@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'Model',
     'Birth_Certificate',
     'acts_request',
-    'Settings'
+    'Settings',
+    'Marriage'
 ]
 
 MIDDLEWARE = [

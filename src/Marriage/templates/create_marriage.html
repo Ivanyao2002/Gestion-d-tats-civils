@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    <title>Créer un Acte de Mariage</title>
+</head>
+<body>
+<div class="wrapper">
+    {% include 'sidebar.html' %}
+    <div class="main-panel">
+        {% include 'header.html' %}
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h3 class="fw-bold mb-3">Créer un Acte de Mariage</h3>
+                    <ul class="breadcrumbs mb-3">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Actes</a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Actes de Mariage</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="card-title">Nouvel Acte de Mariage</div>
+                                    <button class="btn btn-primary btn-round ms-auto" id="listButton">
+                                        <i class="icon-list"></i>
+                                        Liste des Actes
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form method="POST" id="marriage-form" action="{% url 'Marriage:create_marriage' %}" target="_blank">
+                                    {% csrf_token %}
+                                    <div class="form-group row">
+                                        <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <select class="form-select input-fixed" id="registry" name="registry">
+                                                {% for registry in registries %}
+                                                    <option value="{{ registry.id }}">{{ registry.registry_id }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            {% if form.registry.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.registry.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row te">
+                                        <label for="date" class="col-lg-3 col-md-3 col-sm-4 text-end">Date du mariage :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="date" class="form-control" id="date" name="date" required>
+                                            {% if form.marriage_date.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.marriage_date.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="hours" class="col-lg-3 col-md-3 col-sm-4 text-end">Heure du mariage :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="time" class="form-control" id="hours" name="hours" required>
+                                            {% if form.marriage_time.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.marriage_time.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="text-center">Informations du Marié</h4>
+                                            <div class="form-group row">
+                                                <label for="groom_first_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="groom_first_name" name="groom_first_name" required>
+                                                    {% if form.groom_first_name.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.groom_first_name.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="groom_last_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Prénom :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="groom_last_name" name="groom_last_name" required>
+                                                    {% if form.groom_last_name.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.groom_last_name.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="groom_birthplace" class="col-lg-3 col-md-3 col-sm-4 text-end">Lieu de naissance :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="groom_birthplace" name="groom_birthplace" required>
+                                                    {% if form.groom_birthplace.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.groom_birthplace.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="groom_birthdate" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="date" class="form-control" id="groom_birthdate" name="groom_birthdate" required>
+                                                    {% if form.groom_birthdate.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.groom_birthdate.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="groom_father" class="col-lg-3 col-md-3 col-sm-4 text-end">Père :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="groom_father" name="groom_father" required>
+                                                    {% if form.groom_father.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.groom_father.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="groom_mother" class="col-lg-3 col-md-3 col-sm-4 text-end">Mère :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="groom_mother" name="groom_mother" required>
+                                                    {% if form.groom_mother.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.groom_mother.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="groom_domicile" class="col-lg-3 col-md-3 col-sm-4 text-end">Domicile :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="groom_domicile" name="groom_domicile" required>
+                                                    {% if form.groom_domicile.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.groom_domicile.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h4 class="text-center">Informations de la Mariée</h4>
+                                            <div class="form-group row">
+                                                <label for="bride_first_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="bride_first_name" name="bride_first_name" required>
+                                                    {% if form.bride_first_name.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.bride_first_name.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="bride_last_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Prénom :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="bride_last_name" name="bride_last_name" required>
+                                                    {% if form.bride_last_name.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.bride_last_name.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="bride_birthplace" class="col-lg-3 col-md-3 col-sm-4 text-end">Lieu de naissance :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="bride_birthplace" name="bride_birthplace" required>
+                                                    {% if form.bride_birthplace.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.bride_birthplace.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="bride_birthdate" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="date" class="form-control" id="bride_birthdate" name="bride_birthdate" required>
+                                                    {% if form.bride_birthdate.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.bride_birthdate.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="bride_father" class="col-lg-3 col-md-3 col-sm-4 text-end">Père :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="bride_father" name="bride_father" required>
+                                                    {% if form.bride_father.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.bride_father.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="bride_mother" class="col-lg-3 col-md-3 col-sm-4 text-end">Mère :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="bride_mother" name="bride_mother" required>
+                                                    {% if form.bride_mother.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.bride_mother.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="bride_domicile" class="col-lg-3 col-md-3 col-sm-4 text-end">Domicile :</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                                    <input type="text" class="form-control" id="bride_domicile" name="bride_domicile" required>
+                                                    {% if form.bride_domicile.errors %}
+                                                        <ul class="text-danger">
+                                                            {% for error in form.bride_domicile.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="form-group row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12"></div>
+                                            <div class=" text-center">
+                                                <button type="submit" id="marriage-form" class="btn btn-success">Créer l'Acte</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'scripts.html' %}
+<script>
+    document.getElementById('listButton').onclick = function () {
+        window.location.href = "{% url 'Marriage:marriage_list' %}";
+    };
+</script>
+</body>
+<script>
+    let today = new Date();
+    let date = String(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let year = today.getFullYear();
+
+    today = year + '-' + month + '-' + date;
+
+    // Mettre le minimum de l'input des dates
+    document.getElementById("date").max = today;
+</script>
+<script>
+
+        let todays = new Date();
+        let dd = 31;
+        let mm = 12; // January is 0!
+        let yyyy = todays.getFullYear() - 18;
+
+        todays = yyyy + '-' + mm + '-' + dd;
+
+        // Set the maximum date for the "date_de_naissance" input
+        document.getElementById("groom_birthdate").max = todays;
+        document.getElementById("bride_birthdate").max = todays;
+</script>
+</html>

@@ -81,9 +81,9 @@ def convert_time_to_french(time):
 
     # Convertir les heures en format texte
     if hours == 0:
-        hours_str = "minuit"
+        hours_str = "vingt quatre"
     elif hours == 12:
-        hours_str = "midi"
+        hours_str = "douze"
     elif hours <= 19:
         hours_str = \
             ["une", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize",

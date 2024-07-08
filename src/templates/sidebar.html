@@ -65,39 +65,39 @@
                 <div class="collapse" id="base">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href={% url "Birth_Certificate:Creation_extrait" %}>
+                      <a href="{% url 'Birth_Certificate:Creation_extrait' %}">
                         <span class="sub-item">Nouvel Extrait</span>
                       </a>
                     </li>
                     <li>
-                      <a href="components/buttons.html">
+                      <a href="{% url 'Birth_Certificate:birth_list' %}">
                         <span class="sub-item">Liste des Extraits</span>
                       </a>
                     </li>
-                    <li>
-                      <a href="components/gridsystem.html">
-                        <span class="sub-item">Demandes</span>
-                      </a>
-                    </li>
+{#                    <li>#}
+{#                      <a href="components/gridsystem.html">#}
+{#                        <span class="sub-item">Demandes</span>#}
+{#                      </a>#}
+{#                    </li>#}
                   </ul>
                 </div>
               </li>
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarLayouts">
                   <i class="fas fa-th-list"></i>
-                  <p>Sidebar Layouts</p>
+                  <p>Mariage</p>
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="sidebarLayouts">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="sidebar-style-2.html">
-                        <span class="sub-item">Sidebar Style 2</span>
+                      <a href="{% url 'Marriage:create_marriage' %}">
+                        <span class="sub-item">Nouvel Extrait</span>
                       </a>
                     </li>
                     <li>
-                      <a href="icon-menu.html">
-                        <span class="sub-item">Icon Menu</span>
+                      <a href="{% url 'Marriage:marriage_list' %}">
+                        <span class="sub-item">Liste des Extraits</span>
                       </a>
                     </li>
                   </ul>

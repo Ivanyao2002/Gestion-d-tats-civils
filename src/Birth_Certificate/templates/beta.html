@@ -115,7 +115,7 @@
         </div>
         <div class="pos" id="_81:361" style="top:361;left:81">
     <span id="_12.2" style=" font-family:Arial; font-size:12.2px; color:#ff0000">
-    {{ registre.registry_id}} du {{ registre.creation_date.day }}/{{ registre.creation_date.month }}/{{ registre.creation_date.year }}</span>
+    {{ registre.registry_id}} du {{ registre.creation_date | date:"d/m/Y"}}</span>
         </div>
         <div class="pos" id="_195:361" style="top:361;left:195">
     <span id="_12.2" style=" font-family:Arial; font-size:12.2px; color:#000000">
@@ -227,7 +227,7 @@
         </div>
         <div class="pos" id="_494:954" style="top:954;left:494">
     <span id="_13.4" style=" font-family:Arial; font-size:13.4px; color:#000000">
-    Délivré à NIOFOIN le 05/05/2016 11:11:02</span>
+    Délivré à NIOFOIN le {{ date }} {{ heure }}</span>
         </div>
         <div class="pos" id="_637:972" style="top:972;left:637">
     <span id="_12.1" style=" font-family:Times New Roman; font-size:12.1px; color:#000000">
