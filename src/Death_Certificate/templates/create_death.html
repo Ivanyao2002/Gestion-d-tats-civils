@@ -1,0 +1,246 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    <title>Formulaire de Certificat de Décès</title>
+</head>
+<body>
+<div class="wrapper">
+    {% include 'sidebar.html' %}
+    <div class="main-panel">
+        {% include 'header.html' %}
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h3 class="fw-bold mb-3"> Formulaire de Certificat de Décès</h3>
+                    <ul class="breadcrumbs mb-3">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Certificats</a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Formulaire de Certificat de Décès</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="card-title">Nouveau Certificat de Décès</div>
+                                    <button class="btn btn-primary btn-round ms-auto"  id="listButton" >
+                                        <i class="icon-list"></i>
+                                        Listes des Extraits
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form method="POST" action="{% url 'Death:create' %}" target="_blank">
+                                    {% csrf_token %}
+                                    <div class="form-group row">
+                                        <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <select class="form-select input-fixed" id="registry" name="registry">
+                                                {% for registry in registries %}
+                                                    <option value="{{ registry.id }}">{{ registry.registry_id }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            {% if form.registry.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.registry.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="death_location" class="col-lg-3 col-md-3 col-sm-4 text-end">Lieu de décès :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="death_location" name="death_location"  required>
+                                            {% if form.death_location.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.death_location.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="death_date" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de décès :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="date" class="form-control" id="death_date" name="death_date"  required>
+                                            {% if form.death_date.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.death_date.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="death_time" class="col-lg-3 col-md-3 col-sm-4 text-end">Heure de décès :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="time" class="form-control" id="death_time" name="death_time"  required>
+                                            {% if form.death_time.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.death_time.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="deceased_first_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom du défunt :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="deceased_first_name" name="deceased_first_name"  required>
+                                            {% if form.deceased_last_name.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.deceased_last_name.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="deceased_last_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Prénom du défunt :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="deceased_last_name" name="deceased_last_name"  required>
+                                            {% if form.deceased_first_name.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.deceased_first_name.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="deceased_birthplace" class="col-lg-3 col-md-3 col-sm-4 text-end">Lieu de naissance du défunt :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="deceased_birthplace" name="deceased_birthplace"  required>
+                                            {% if form.deceased_birthplace.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.deceased_birthplace.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="deceased_birthdate" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance du défunt :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="date" class="form-control" id="deceased_birthdate" name="deceased_birthdate"  required>
+                                            {% if form.deceased_birthdate.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.deceased_birthdate.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="deceased_profession" class="col-lg-3 col-md-3 col-sm-4 text-end">Profession du défunt :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="deceased_profession" name="deceased_profession"  required>
+                                            {% if form.deceased_profession.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.deceased_profession.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="deceased_father" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom du père du défunt :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="deceased_father" name="deceased_father" required>
+                                            {% if form.deceased_father.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.deceased_father.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="deceased_mother" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom de la mère du défunt :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="deceased_mother" name="deceased_mother" required>
+                                            {% if form.deceased_mother.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.deceased_mother.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-3 col-md-3 col-sm-4"></div>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <button type="submit" class="btn btn-success">Enregistrer</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'footer.html' %}
+    </div>
+    {% include 'custom.html' %}
+</div>
+{% include 'scripts.html' %}
+</body>
+<script>
+    $(document).ready(function () {
+        $('#listButton').click(function () {
+            window.location.href = "{% url 'Birth_Certificate:birth_list' %}";
+        });
+    });
+    let today = new Date();
+    let date = String(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let year = today.getFullYear();
+
+    today = year + '-' + month + '-' + date;
+
+    // Mettre le minimum de l'input des dates
+    document.getElementById("deceased_birthdate").max = today;
+    document.getElementById("death_date").max = today;
+</script>
+</html>

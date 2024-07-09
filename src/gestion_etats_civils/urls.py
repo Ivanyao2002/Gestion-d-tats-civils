@@ -29,5 +29,6 @@ urlpatterns = [
     path('acts-request/', include('acts_request.urls')),
     path('Certificat-de-vie/', include('Life_Certificate.urls')),
     path('Certificat-de-non-remarriage/', include('Non_Remarriage.urls')),
+    path('Extrait-de-décès/', include('Death_Certificate.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

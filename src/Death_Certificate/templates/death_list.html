@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    <title>Liste des Décès</title>
+</head>
+<body>
+<div class="wrapper">
+    {% include 'sidebar.html' %}
+    <div class="main-panel">
+        {% include 'header.html' %}
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h3 class="fw-bold mb-3">Liste des Décès</h3>
+                    <ul class="breadcrumbs mb-3">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Certificats</a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Liste des Décès</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title">Décès</h4>
+                                    <button class="btn btn-primary btn-round ms-auto" id="addButton">
+                                        <i class="fa fa-plus"></i>
+                                        Créer Certificat de Décès
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="add-row" class="display table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Prénoms</th>
+                                            <th>Lieu de naissance</th>
+                                            <th>Date de naissance</th>
+                                            <th>Date de décès</th>
+                                            <th style="width: 10%">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Prénoms</th>
+                                            <th>Lieu de naissance</th>
+                                            <th>Date de naissance</th>
+                                            <th>Date de décès</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </tfoot>
+                                        <tbody>
+                                        {% for death in deaths %}
+                                            <tr>
+                                                <td>{{ death.deceased_last_name }}</td>
+                                                <td>{{ death.deceased_first_name }}</td>
+                                                <td>{{ death.deceased_birthplace }}</td>
+                                                <td>{{ death.deceased_birthdate }}</td>
+                                                <td>{{ death.death_date }}</td>
+                                                <td>
+                                                    <div class="form-button-action">
+                                                        <a href="{% url 'Death:update' death.id %}" class="btn btn-link btn-primary btn-lg" title="Modifier">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a href="{% url 'Death:print' death.id %}" class="btn btn-link btn-danger" title="Imprimer" target="_blank">
+                                                            <i class="icon-printer"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'footer.html' %}
+    </div>
+    {% include 'custom.html' %}
+</div>
+{% include 'scripts.html' %}
+</body>
+<script>
+    $(document).ready(function () {
+        $('#add-row').DataTable({
+            pageLength: 5,
+        });
+
+        $('#addButton').click(function () {
+            window.location.href = "{% url 'Death:create' %}";
+        });
+    });
+</script>
+</html>

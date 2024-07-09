@@ -68,16 +68,16 @@ class Marriage(models.Model):
 
 class Death(models.Model):
     registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
-    death_id = models.AutoField(primary_key=True)
-    declarant_age = models.IntegerField()
-    declarant_main_residence = models.CharField(max_length=200)
     death_location = models.CharField(max_length=100)
     death_date = models.DateField()
+    death_time = models.TimeField()
     deceased_last_name = models.CharField(max_length=100)
     deceased_first_name = models.CharField(max_length=100)
     deceased_birthplace = models.CharField(max_length=100)
     deceased_birthdate = models.DateField()
     deceased_profession = models.CharField(max_length=100)
+    deceased_father = models.CharField(max_length=100)
+    deceased_mother = models.CharField(max_length=100)
     creation_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

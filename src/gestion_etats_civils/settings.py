@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'Marriage',
     'Life_Certificate',
     'Non_Remarriage',
+    'Death_Certificate',
 ]
 
 MIDDLEWARE = [
@@ -130,7 +131,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-]
+    ]
 MEDIA_URL = '/medias/'
 MEDIA_ROOT = BASE_DIR / 'medias'
 

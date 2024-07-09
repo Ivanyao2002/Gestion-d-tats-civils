@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+	<meta charset="UTF-8"/>
+	<meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+	<title>document</title>
+<style>
+	p {margin: 0; padding: 0;}	.ft10{font-size:12px;font-family:Helvetica;color:#000000;}
+	.ft11{font-size:15px;font-family:Helvetica;color:#000000;}
+	.ft12{font-size:8px;font-family:Helvetica;color:#000000;}
+	.ft13{font-size:30px;font-family:Times;color:#000000;}
+	.ft14{font-size:18px;font-family:Times;color:#000000;}
+	.ft15{font-size:18px;font-family:Times;color:#ff0000;}
+	.ft16{font-size:12px;font-family:Helvetica;color:#000000;}
+	.ft17{font-size:12px;font-family:Helvetica;color:#ff0000;}
+	.ft18{font-size:11px;font-family:Helvetica;color:#ff0000;}
+	.ft19{font-size:11px;font-family:Helvetica;color:#000000;}
+	.ft110{font-size:15px;font-family:Helvetica;color:#ff0000;}
+	.ft111{font-size:9px;font-family:Helvetica;color:#000000;}
+	.ft112{font-size:11px;font-family:Times;color:#000000;}
+	.ft113{font-size:14px;font-family:Helvetica;color:#000000;}
+	.ft114{font-size:14px;font-family:Helvetica;color:#000000;}
+	.ft115{font-size:9px;font-family:Helvetica;color:#000000;}
+	.ft116{font-size:12px;line-height:17px;font-family:Helvetica;color:#000000;}
+	.ft117{font-size:14px;line-height:19px;font-family:Helvetica;color:#000000;}
+    @media print {
+            @page {
+                margin: 0;
+            }
+            body {
+                margin: 0;
+            }
+            .button-container {
+                display: none; /* Masquer le container lors de l'impression */
+            }
+        }
+        .button-container {
+            position: absolute;
+            top: 20px; /* Ajustez la position verticale selon vos besoins */
+            right: 20px; /* Ajustez la position horizontale selon vos besoins */
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+</style>
+</head>
+<body>
+{% load custom_filters %}
+<div class="button-container">
+    <button class="button" onclick="window.print()">Imprimer</button>
+</div>
+<div id="page1-div" style="position:relative;width:892px;height:800px;">
+<img src="{{ setting.logo.url }}" alt="image" style="position:absolute;top:103px;left:93px;width:100px;height:100px;"/>
+<p style="position:absolute;top:480px;left:539px;white-space:nowrap" class="ft10">Délivré&#160;à&#160;&#160;{{ setting.city | upper}}&#160;le&#160;&#160;{{ date }}&#160;{{ heure }}</p>
+<p style="position:absolute;top:215px;left:103px;white-space:nowrap" class="ft11"><b>ETAT&#160;&#160;CIVIL</b></p>
+<p style="position:absolute;top:243px;left:74px;white-space:nowrap" class="ft12">CIRCONSCRIPTION&#160;D'ETAT&#160;CIVIL</p>
+<p style="position:absolute;top:44px;left:482px;white-space:nowrap" class="ft13"><b>E&#160;X&#160;T&#160;R&#160;A&#160;I&#160;T</b></p>
+<p style="position:absolute;top:83px;left:400px;white-space:nowrap" class="ft14"><b>du&#160;Registre&#160;des&#160;actes&#160;de&#160;l'Etat&#160;Civil</b></p>
+<p style="position:absolute;top:121px;left:606px;white-space:nowrap" class="ft15"><b>{{ annee }}</b></p>
+<p style="position:absolute;top:326px;left:359px;white-space:nowrap" class="ft116"><b>{{ death.deceased_birthplace | upper }}&#160;le&#160;&#160;{{ death.deceased_birthdate | date_to_french_string }}&#160;<br/>/°.................................................&#160;..............................................................</b></p>
+<p style="position:absolute;top:293px;left:520px;white-space:nowrap" class="ft17"><b>&#160;-&#160;{{ death.deceased_first_name | upper }}&#160;&#160;{{ death.deceased_last_name | upper }}&#160;/°&#160;&#160;.......................</b></p>
+<p style="position:absolute;top:407px;left:300px;white-space:nowrap" class="ft10">Fils</p>
+<p style="position:absolute;top:408px;left:342px;white-space:nowrap" class="ft16"><b>&#160;de&#160;{{ death.deceased_father | upper }}&#160;&#160;/°..................................&#160;....................................................</b></p>
+<p style="position:absolute;top:440px;left:301px;white-space:nowrap" class="ft10">et&#160;de&#160;<b>&#160;{{ death.deceased_mother | upper }}&#160;&#160;/°....................................&#160;......................................................</b></p>
+<p style="position:absolute;top:324px;left:84px;white-space:nowrap" class="ft18">{{ registre.registry_id}}&#160;du&#160;{{ registre.creation_date | date:"d/m/Y"}}</p>
+<p style="position:absolute;top:375px;left:123px;white-space:nowrap" class="ft19">DECES&#160;DE&#160;:</p>
+<p style="position:absolute;top:403px;left:48px;white-space:nowrap" class="ft110">{{ death.deceased_first_name | upper }}........................</p>
+{#<p style="position:absolute;top:526px;left:82px;white-space:nowrap" class="ft111">IN&#160;-&#160;ACTES&#160;-&#160;D3</p>#}
+<p style="position:absolute;top:566px;left:89px;white-space:nowrap" class="ft112">Timbre&#160;fiscal</p>
+<p style="position:absolute;top:514px;left:240px;white-space:nowrap" class="ft19">Sceau</p>
+<p style="position:absolute;top:522px;left:663px;white-space:nowrap" class="ft112">L'Officier&#160;de&#160;l'Etat&#160;Civil</p>
+<p style="position:absolute;top:541px;left:670px;white-space:nowrap" class="ft112">L'agent&#160;de&#160;l'Etat&#160;Civil</p>
+<p style="position:absolute;top:574px;left:703px;white-space:nowrap" class="ft112">Signature</p>
+<p style="position:absolute;top:121px;left:468px;white-space:nowrap" class="ft14"><b>pour&#160;l'année&#160;</b></p>
+<p style="position:absolute;top:326px;left:300px;white-space:nowrap" class="ft10">Né&#160;(e)&#160;à</p>
+<p style="position:absolute;top:252px;left:300px;white-space:nowrap" class="ft10">Le</p>
+<p style="position:absolute;top:324px;left:44px;white-space:nowrap" class="ft19">N°&#160;.</p>
+<p style="position:absolute;top:324px;left:211px;white-space:nowrap" class="ft19">du&#160;registre.</p>
+<p style="position:absolute;top:424px;left:48px;white-space:nowrap" class="ft117"><b>{{ death.deceased_last_name | upper }}&#160;/°...&#160;...&#160;....&#160;<br/>....&#160;.......&#160;.....&#160;......&#160;....&#160;...&#160;.......&#160;.....&#160;<br/></b>....................................................</p>
+<p style="position:absolute;top:252px;left:320px;white-space:nowrap" class="ft116"><b>{{ death.death_date | date_to_french_string }}&#160;à&#160;&#160;{{  death.death_time | time_to_french_string }}&#160;&#160;&#160;/°................................&#160;</b></p>
+<p style="position:absolute;top:374px;left:376px;white-space:nowrap" class="ft16"><b>{{ death.deceased_profession | upper }}&#160;/°..........................................&#160;....................................................</b></p>
+<p style="position:absolute;top:373px;left:300px;white-space:nowrap" class="ft10">Profession</p>
+<p style="position:absolute;top:292px;left:300px;white-space:nowrap" class="ft10">Est&#160;décédé&#160;(e)&#160;à&#160;:&#160;{{ death.death_location | upper }}&#160;...............</p>
+<p style="position:absolute;top:39px;left:55px;white-space:nowrap" class="ft10">DEPARTEMENT&#160;DE&#160;{{ setting.departement | upper }}</p>
+<p style="position:absolute;top:63px;left:86px;white-space:nowrap" class="ft16"><b>COMMUNE&#160;DE&#160;{{ setting.commune | upper }}</b></p>
+<p style="position:absolute;top:266px;left:58px;white-space:nowrap" class="ft115"><b>CENTRE&#160;&#160;D'ETAT&#160;&#160;CIVIL&#160;&#160;DE&#160;&#160;{{ setting.commune | upper }}</b></p>
+</div>
+</body>
+</html>
