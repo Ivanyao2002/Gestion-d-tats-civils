@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form method="POST" id="edit-marriage-form" action="{% url 'Marriage:edit_marriage' marriage.id %}">
+                                <form method="POST" id="edit-marriage-form" action="{% url 'Marriage:edit_marriage' marriage.id %}" target="_blank">
                                     {% csrf_token %}
                                     <div class="form-group row">
                                         <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
@@ -113,7 +113,7 @@
                                             <div class="form-group row">
                                                 <label for="groom_birthdate" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance :</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-8">
-                                                    <input type="date" class="form-control" id="groom_birthdate" name="groom_birthdate" value="{{ marriage.groom_birthdate }}" required>
+                                                    <input type="date" class="form-control" id="groom_birthdate" name="groom_birthdate" value="{{ marriage.groom_birthdate |date:'Y-m-d' }}" required>
                                                     {% if form.groom_birthdate.errors %}
                                                         <ul class="text-danger">
                                                             {% for error in form.groom_birthdate.errors %}
@@ -215,7 +215,7 @@
                                             <div class="form-group row">
                                                 <label for="bride_birthdate" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance :</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-8">
-                                                    <input type="date" class="form-control" id="bride_birthdate" name="bride_birthdate" value="{{ marriage.bride_birthdate }}" required>
+                                                    <input type="date" class="form-control" id="bride_birthdate" name="bride_birthdate" value="{{ marriage.bride_birthdate |date:'Y-m-d' }}" required>
                                                     {% if form.bride_birthdate.errors %}
                                                         <ul class="text-danger">
                                                             {% for error in form.bride_birthdate.errors %}
@@ -293,4 +293,68 @@
 </div>
 {% include 'scripts.html' %}
 </body>
+<script>
+    let today = new Date();
+    let date = String(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let year = today.getFullYear();
+
+    today = year + '-' + month + '-' + date;
+
+    // Mettre le minimum de l'input des dates
+    document.getElementById("date").max = today;
+</script>
+<script>
+
+        let todays = new Date();
+        let dd = 31;
+        let mm = 12; // January is 0!
+        let yyyy = todays.getFullYear() - 18;
+
+        todays = yyyy + '-' + mm + '-' + dd;
+
+        // Set the maximum date for the "date_de_naissance" input
+        document.getElementById("groom_birthdate").max = todays;
+        document.getElementById("bride_birthdate").max = todays;
+
+
+
+</script>
+<script>
+     document.getElementById('edit-marriage-form').addEventListener('submit', function(event) {
+        // Récupère le formulaire
+        var form = this;
+
+        // Récupère l'action du formulaire
+        var formAction = form.getAttribute('action');
+
+        // Récupère le token CSRF
+        var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        // Effectue la soumission du formulaire via fetch API
+        fetch(formAction, {
+            method: form.method,
+            body: new FormData(form),
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        }).then(response => {
+            if (response.ok) {
+                // Réinitialise le formulaire après une soumission réussie
+                form.reset();
+
+                // Redirige vers la liste des extraits
+                window.location.href = "{% url 'Marriage:marriage_list' %}";
+
+                // Redirige vers la page d'impression
+                window.open("{% url 'Marriage:print_marriage_certificate' marriage.id %}", '_blank');
+            } else {
+                // Gère les erreurs si nécessaire
+                console.log('Erreur lors de la soumission du formulaire');
+            }
+        }).catch(error => {
+            console.error('Erreur:', error);
+        });
+    });
+</script>
 </html>

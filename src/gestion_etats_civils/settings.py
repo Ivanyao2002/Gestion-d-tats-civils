@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'Birth_Certificate',
     'acts_request',
     'Settings',
-    'Marriage'
+    'Marriage',
+    'Life_Certificate',
+    'Non_Remarriage',
 ]
 
 MIDDLEWARE = [

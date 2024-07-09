@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    <title>Création de certificat de vie</title>
+
+</head>
+<body>
+<div class="wrapper">
+    <!-- Sidebar -->
+    {% include 'sidebar.html' %}
+    <!-- End Sidebar -->
+
+
+    <div class="main-panel">
+        {% include 'header.html' %}
+
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h3 class="fw-bold mb-3">Créer un Certificat de Vie</h3>
+                    <ul class="breadcrumbs mb-3">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Actes</a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Certificat de Vie</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="card-title">Nouvel Certificat de Vie</div>
+                                    <button class="btn btn-primary btn-round ms-auto"  id="listButton" >
+                                        <i class="icon-list"></i>
+                                        Listes des Certificats de Vie
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <form method="POST" id="birth-form" action="{% url 'Life:life_create' %}" target="_blank" >
+                                    {% csrf_token %}
+
+                                    <div class="form-group row">
+                                        <label for="name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="name" name="name" required>
+                                            {% if form.name.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.name.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="surname" class="col-lg-3 col-md-3 col-sm-4 text-end">Prénoms:</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="surname" name="surname" required>
+                                            {% if form.surname.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.surname.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="job" class="col-lg-3 col-md-3 col-sm-4 text-end">Profession:</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="job" name="job" required>
+                                            {% if form.job.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.job.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="birthdate" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+                                            {% if form.birthdate.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.birthdate.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="birthplace" class="col-lg-3 col-md-3 col-sm-4 text-end">Lieu de naissance :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="birthplace" name="birthplace" required>
+                                            {% if form.birthplace.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.birthplace.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <div class="form-group row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12"></div>
+                                            <div class="col-lg-4 col-md-9 col-sm-12">
+                                                <button type="submit"   class="btn btn-success">Enregistrer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        {% include 'footer.html' %}
+    </div>
+
+    <!-- Custom settings -->
+    {% include 'custom.html' %}
+    <!-- End Custom settings -->
+</div>
+<!--  All scripts  -->
+{% include 'scripts.html' %}
+</body>
+
+{# Enregistrement reussi ou erreur #}
+<script>
+
+
+    let today = new Date();
+    let date = String(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let year = today.getFullYear();
+
+    today = year + '-' + month + '-' + date;
+
+    // Mettre le minimum de l'input des dates
+    document.getElementById("birthdate").max = today;
+
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#listButton').click(function () {
+            window.location.href = "{% url 'Life:life_list' %}";
+        });
+    });
+</script>
+</html>

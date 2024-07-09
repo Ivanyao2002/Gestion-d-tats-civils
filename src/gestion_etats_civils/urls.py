@@ -23,9 +23,11 @@ from gestion_etats_civils import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', accueil, name='index'),
-    path('Birth_Certificate/', include('Birth_Certificate.urls')),
+    path('Extrait-de-naissance/', include('Birth_Certificate.urls')),
     path('Mariage/', include('Marriage.urls')),
     path('Settings/', include('Settings.urls')),
     path('acts-request/', include('acts_request.urls')),
+    path('Certificat-de-vie/', include('Life_Certificate.urls')),
+    path('Certificat-de-non-remarriage/', include('Non_Remarriage.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

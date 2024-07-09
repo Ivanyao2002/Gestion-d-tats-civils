@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+	<meta charset="UTF-8"/>
+	<meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+	<title>document</title>
+<style>
+	p {margin: 0; padding: 0;}	.ft10{font-size:17px;font-family:Helvetica;color:#000000;}
+	.ft11{font-size:15px;font-family:Helvetica;color:#000000;}
+	.ft12{font-size:8px;font-family:Helvetica;color:#000000;}
+	.ft13{font-size:12px;font-family:Helvetica;color:#000000;}
+	.ft14{font-size:8px;font-family:Helvetica;color:#000000;}
+	.ft15{font-size:12px;font-family:Helvetica;color:#000000;}
+	.ft16{font-size:9px;font-family:Helvetica;color:#000000;}
+	.ft17{font-size:9px;font-family:Times;color:#000000;}
+	.ft18{font-size:21px;font-family:Times;color:#000000;}
+	.ft19{font-size:11px;font-family:Times;color:#000000;}
+	.ft110{font-size:11px;font-family:Helvetica;color:#000000;}
+     @media print {
+            @page {
+                margin: 0;
+            }
+            body {
+                margin: 0;
+            }
+            .button-container {
+                display: none; /* Masquer le container lors de l'impression */
+            }
+        }
+        .button-container {
+            position: absolute;
+            top: 20px; /* Ajustez la position verticale selon vos besoins */
+            right: 20px; /* Ajustez la position horizontale selon vos besoins */
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+</style>
+</head>
+<body>
+<div class="button-container">
+    <button class="button" onclick="window.print()">Imprimer</button>
+</div>
+<div id="page1-div" style="position:relative;width:892px;height:1000px;">
+<img src="{{ setting.logo.url }}" alt="image" style="position:absolute;top:103px;left:93px;width:100px;height:100px;"/>
+<p style="position:absolute;top:492px;left:36px;white-space:nowrap" class="ft10">1°&#160;&#160;{{ remarriage.titre_witness1 }}&#160;{{ remarriage.witness1 | upper }}&#160;&#160;.............................&#160;...........................................................................</p>
+<p style="position:absolute;top:124px;left:617px;white-space:nowrap" class="ft11">{{ setting.city | upper }}&#160;&#160;le&#160;&#160;{{ date }}</p>
+<p style="position:absolute;top:90px;left:70px;white-space:nowrap" class="ft12"><b>REPUBLIQUE&#160;DE&#160;COTE&#160;D'IVOIRE</b></p>
+<p style="position:absolute;top:244px;left:105px;white-space:nowrap" class="ft13"><b>ETAT&#160;CIVIL</b></p>
+<p style="position:absolute;top:266px;left:57px;white-space:nowrap" class="ft14">CIRCONSCRIPTION&#160;D'ETAT&#160;CIVIL</p>
+<p style="position:absolute;top:39px;left:43px;white-space:nowrap" class="ft15">DEPARTEMENT&#160;DE&#160;{{ setting.departement | upper }}</p>
+<p style="position:absolute;top:63px;left:59px;white-space:nowrap" class="ft13"><b>COMMUNE&#160;DE&#160;{{ setting.commune | upper }}</b></p>
+<p style="position:absolute;top:281px;left:104px;white-space:nowrap" class="ft14">DE&#160;{{ setting.commune | upper }}</p>
+<p style="position:absolute;top:299px;left:57px;white-space:nowrap" class="ft16"><b>CENTRE&#160;&#160;D'ETAT&#160;&#160;CIVIL&#160;&#160;DE&#160;&#160;</b></p>
+<p style="position:absolute;top:314px;left:109px;white-space:nowrap" class="ft16"><b>{{ setting.commune | upper}}</b></p>
+<p style="position:absolute;top:39px;left:582px;white-space:nowrap" class="ft13"><b>REPUBLIQUE&#160;DE&#160;CÔTE&#160;D'IVOIRE</b></p>
+<p style="position:absolute;top:63px;left:611px;white-space:nowrap" class="ft13"><b>Union&#160;-&#160;Dicipline&#160;-&#160;Travail</b></p>
+<p style="position:absolute;top:85px;left:647px;white-space:nowrap" class="ft17"><b>-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-&#160;-</b></p>
+<p style="position:absolute;top:339px;left:236px;white-space:nowrap" class="ft18"><b>CERTIFICAT&#160;DE&#160;NON&#160;REMARIAGE</b></p>
+<p style="position:absolute;top:405px;left:192px;white-space:nowrap" class="ft10">Le&#160;maire&#160;de&#160;la&#160;commune&#160;de&#160;&#160;{{ setting.commune }}&#160;,&#160;sur&#160;déclaration&#160;de&#160;l'intéressé&#160;et&#160;&#160;</p>
+<p style="position:absolute;top:440px;left:36px;white-space:nowrap" class="ft10">l'attestation&#160;des&#160;témoins&#160;suivants</p>
+<p style="position:absolute;top:545px;left:36px;white-space:nowrap" class="ft10">2°&#160;&#160;{{ remarriage.titre_witness2 }}&#160;{{ remarriage.witness2 | upper}}&#160;&#160;.......................&#160;.......................................................................</p>
+<p style="position:absolute;top:595px;left:36px;white-space:nowrap" class="ft10">Certifie&#160;que&#160;&#160;{{ remarriage.name | upper }}&#160;&#160;.................................................................</p>
+{% if remarriage.etat == "Veuve" %}
+    <p style="position:absolute;top:643px;left:36px;white-space:nowrap" class="ft10">Ne&#160;s'est&#160;jamais&#160;remariée&#160;depuis&#160;le&#160;décès&#160;de&#160;son&#160;mari&#160;et&#160;qu'elle&#160;est&#160;en&#160;possession&#160;de&#160;ces&#160;droits</p>
+<p style="position:absolute;top:682px;left:36px;white-space:nowrap" class="ft10">civils.</p>
+    {% else %}
+    <p style="position:absolute;top:643px;left:36px;white-space:nowrap" class="ft10">Ne&#160;s'est&#160;jamais&#160;remarié&#160;depuis&#160;le&#160;décès&#160;de&#160;sa&#160;femme&#160;et&#160;qu'il&#160;est&#160;en&#160;possession&#160;de&#160;ces&#160;droits</p>
+<p style="position:absolute;top:682px;left:36px;white-space:nowrap" class="ft10">civils.</p>
+    {% endif %}
+<p style="position:absolute;top:717px;left:129px;white-space:nowrap" class="ft10">En&#160;foi&#160;de&#160;quoi,&#160;le&#160;présent&#160;Certificat&#160;lui&#160;est&#160;délivré&#160;pour&#160;servir&#160;et&#160;valoir&#160;ce&#160;que&#160;de&#160;droits</p>
+<p style="position:absolute;top:784px;left:542px;white-space:nowrap" class="ft11">Délivré&#160;à&#160;&#160;{{ setting.commune | upper }}&#160;&#160;le&#160;&#160;{{ date }}</p>
+<p style="position:absolute;top:853px;left:36px;white-space:nowrap" class="ft10">Les&#160;témoins&#160;</p>
+<p style="position:absolute;top:910px;left:36px;white-space:nowrap" class="ft10">1°&#160;{{ remarriage.titre_witness1 }}.......................................</p>
+<p style="position:absolute;top:1006px;left:36px;white-space:nowrap" class="ft10">2°&#160;{{ remarriage.titre_witness2 }}.......................................</p>
+<p style="position:absolute;top:1137px;left:95px;white-space:nowrap" class="ft19">Timbre&#160;fiscal</p>
+<p style="position:absolute;top:1124px;left:231px;white-space:nowrap" class="ft110">Sceau</p>
+</div>
+</body>
+</html>

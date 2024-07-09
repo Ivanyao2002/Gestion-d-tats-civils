@@ -15,7 +15,8 @@ def print_marriage_certificate(request, marriage_id):
     registry = Registry.objects.get(id=registry_id)
     settings = Settings.get_settings()
     return render(request, 'alpha.html',
-                  {'marriage_record': marriage_record, 'annee': annee, 'registre': registry, 'setting': settings, 'date': date, 'heure': heure})
+                  {'marriage_record': marriage_record, 'annee': annee, 'registre': registry, 'setting': settings,
+                   'date': date, 'heure': heure})
 
 
 def create_marriage(request):
@@ -37,7 +38,7 @@ def edit_marriage(request, marriage_id):
         form = MarriageForm(request.POST, instance=marriage)
         if form.is_valid():
             form.save()
-            return redirect('Marriage:marriage_list')
+            return redirect('Marriage:print_marriage_certificate', marriage_id=marriage.id)
     else:
         form = MarriageForm(instance=marriage)
 

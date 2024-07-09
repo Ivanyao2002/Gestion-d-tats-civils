@@ -120,6 +120,29 @@ class Divorce(models.Model):
         return f'Divorce between {self.husband_last_name} and {self.husband_first_name}'
 
 
+class Life(models.Model):
+    name = models.CharField(max_length=50)
+    surname = models.CharField(max_length=100)
+    job = models.CharField(max_length=100)
+    birthdate = models.DateField()
+    birthplace = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.name} {self.surname}'
+
+
+class Non_remarriage(models.Model):
+    name = models.CharField(max_length=100)
+    witness1 = models.CharField(max_length=100)
+    witness2 = models.CharField(max_length=100)
+    titre_witness1 = models.CharField(max_length=100)
+    titre_witness2 = models.CharField(max_length=100)
+    etat = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f' le certificat de non-remariage de {self.name}'
+
+
 class Request(models.Model):
     request_id = models.AutoField(primary_key=True)
     last_name = models.CharField(max_length=100)

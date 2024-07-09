@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    <title>Création de Certificat de Non-Remariage</title>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Sidebar -->
+    {% include 'sidebar.html' %}
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+        {% include 'header.html' %}
+
+        <div class="container">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h3 class="fw-bold mb-3">Créer un Certificat de Non-Remariage</h3>
+                    <ul class="breadcrumbs mb-3">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Certificats</a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Non-Remariage</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="card-title">Nouveau Certificat de Non-Remariage</div>
+                                    <button class="btn btn-primary btn-round ms-auto" id="listButton">
+                                        <i class="icon-list"></i>
+                                        Liste des Certificats de Non-Remariage
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <form method="POST" id="non-remarriage-form" action="{% url 'Non_remarriage:create' %}" target="_blank">
+                                    {% csrf_token %}
+                                    <div class="form-group row">
+                                        <label for="name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="name" name="name" required>
+                                            {% if form.name.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.name.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="witness1" class="col-lg-3 col-md-3 col-sm-4 text-end">Témoin 1 :</label>
+                                        <div class="col-sm-1">
+                                            <select class="form-control" id="witness1" name="titre_witness1" required>
+                                                <option value="M.">M.</option>
+                                                <option value="Mme">Mme</option>
+                                                <option value="Mlle">Mlle</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="witness1" name="witness1" required>
+                                            {% if form.witness1_name.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.witness1_name.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="witness2" class="col-lg-3 col-md-3 col-sm-4 text-end">Témoin 2 :</label>
+                                        <div class="col-sm-1">
+                                            <select class="form-control" id="witness2" name="titre_witness2" required>
+                                                <option value="M.">M.</option>
+                                                <option value="Mme">Mme</option>
+                                                <option value="Mlle">Mlle</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <input type="text" class="form-control" id="witness2" name="witness2" required>
+                                            {% if form.witness2_name.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.witness2_name.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-md-3 col-sm-4 text-end">Etat :</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-8">
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" id="etat_veuf" name="etat" value="Veuf">
+                                                <label class="form-check-label" for="etat_veuf">Veuf</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" id="etat_veuve" name="etat" value="Veuve">
+                                                <label class="form-check-label" for="etat_veuve">Veuve</label>
+                                            </div>
+                                            {% if form.etat.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.etat.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="card-footer">
+                                        <div class="form-group row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12"></div>
+                                            <div class="col-lg-4 col-md-9 col-sm-12">
+                                                <button type="submit" class="btn btn-success">Enregistrer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'footer.html' %}
+    </div>
+
+    <!-- Custom settings -->
+    {% include 'custom.html' %}
+    <!-- End Custom settings -->
+</div>
+<!--  All scripts  -->
+{% include 'scripts.html' %}
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('#listButton').click(function () {
+            window.location.href = "{% url 'Non_remarriage:list' %}";
+        });
+    });
+</script>
+</html>
