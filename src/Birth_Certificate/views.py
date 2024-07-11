@@ -1,6 +1,4 @@
 import os
-from docx import Document
-from docx2pdf import convert
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.conf import settings

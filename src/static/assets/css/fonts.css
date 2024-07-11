@@ -6397,7 +6397,7 @@ readers do not read off random characters that represent icons */
   content: "\e099";
 }
 .icon-settings:before {
-  content: "\e09a";
+  content: "\e099";
 }
 .icon-star:before {
   content: "\e09b";
