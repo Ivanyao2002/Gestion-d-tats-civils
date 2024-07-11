@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" id="non-remarriage-form" action="{% url 'Non_remarriage:create' %}" target="_blank">
+                                <form method="POST" id="non-remarriage-form" action="{% url 'Non_remarriage:create' %}" target="_blank" onsubmit="clearForm()">
                                     {% csrf_token %}
                                     <div class="form-group row">
                                         <label for="name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom :</label>
@@ -166,5 +166,11 @@
             window.location.href = "{% url 'Non_remarriage:list' %}";
         });
     });
+
+    function clearForm() {
+        setTimeout(() => {
+            document.getElementById("non-remarriage-form").reset();
+        }, 1000);
+    }
 </script>
 </html>

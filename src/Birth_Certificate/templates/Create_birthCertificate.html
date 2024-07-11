@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" id="birth-form" action="{% url 'Birth_Certificate:Creation_extrait' %}" target="_blank" >
+                                <form method="POST" id="birth-form" action="{% url 'Birth_Certificate:Creation_extrait' %}" target="_blank" onsubmit="clearForm()">
                                     {% csrf_token %}
                                     <div class="form-group row">
                                         <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
@@ -245,35 +245,12 @@
     // Mettre le minimum de l'input des dates
     document.getElementById("birth_date").max = today;
 
+    function clearForm() {
+        setTimeout(() => {
+            document.getElementById("birth-form").reset();
+        }, 1000);
+    }
 
-    {#document.getElementById('birth-form').addEventListener('submit', function(event) {#}
-    {#    event.preventDefault(); // Empêche la soumission par défaut#}
-    {##}
-    {#    // Récupère le formulaire#}
-    {#    var form = this;#}
-    {##}
-    {#    // Effectue la soumission du formulaire via fetch API ou XMLHttpRequest#}
-    {#    fetch(form.action, {#}
-    {#        method: form.method,#}
-    {#        body: new FormData(form),#}
-    {#        headers: {#}
-    {#            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value#}
-    {#        }#}
-    {#    }).then(response => {#}
-    {#        if (response.ok) {#}
-    {#            // Réinitialise le formulaire après une soumission réussie#}
-    {#            form.reset();#}
-    {##}
-    {#            // Redirige vers la page d'impression#}
-    {#           #}
-    {#        } else {#}
-    {#            // Gère les erreurs si nécessaire#}
-    {#            console.log('Erreur lors de la soumission du formulaire');#}
-    {#        }#}
-    {#    }).catch(error => {#}
-    {#        console.error('Erreur:', error);#}
-    {#    });#}
-    {#})#}
 </script>
 <script>
     $(document).ready(function () {

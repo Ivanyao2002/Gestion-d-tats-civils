@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form method="POST" id="marriage-form" action="{% url 'Marriage:create_marriage' %}" target="_blank">
+                                <form method="POST" id="marriage-form" action="{% url 'Marriage:create_marriage' %}" target="_blank" onsubmit="clearForm()">
                                     {% csrf_token %}
                                     <div class="form-group row">
                                         <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
@@ -342,5 +342,11 @@
         // Set the maximum date for the "date_de_naissance" input
         document.getElementById("groom_birthdate").max = todays;
         document.getElementById("bride_birthdate").max = todays;
+
+        function clearForm() {
+        setTimeout(() => {
+            document.getElementById("marriage-form").reset();
+        }, 1000);
+    }
 </script>
 </html>

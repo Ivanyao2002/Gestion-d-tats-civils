@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="{% url 'Death:create' %}" target="_blank">
+                                <form method="POST" id="death-form" action="{% url 'Death:create' %}" target="_blank" onsubmit="clearForm()">
                                     {% csrf_token %}
                                     <div class="form-group row">
                                         <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
@@ -242,5 +242,11 @@
     // Mettre le minimum de l'input des dates
     document.getElementById("deceased_birthdate").max = today;
     document.getElementById("death_date").max = today;
+
+    function clearForm() {
+        setTimeout(() => {
+            document.getElementById("death-form").reset();
+        }, 1000);
+    }
 </script>
 </html>

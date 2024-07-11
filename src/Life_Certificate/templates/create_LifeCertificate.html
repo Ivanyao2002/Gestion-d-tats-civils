@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" id="birth-form" action="{% url 'Life:life_create' %}" target="_blank" >
+                                <form method="POST" id="life-form" action="{% url 'Life:life_create' %}" target="_blank" onsubmit="clearForm()">
                                     {% csrf_token %}
 
                                     <div class="form-group row">
@@ -171,7 +171,11 @@
     // Mettre le minimum de l'input des dates
     document.getElementById("birthdate").max = today;
 
-
+    function clearForm() {
+        setTimeout(() => {
+            document.getElementById("life-form").reset();
+        }, 1000);
+    }
 
 </script>
 <script>
