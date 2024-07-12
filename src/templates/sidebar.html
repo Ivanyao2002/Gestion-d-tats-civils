@@ -39,7 +39,7 @@
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#base">
                         <i class="fas fa-layer-group"></i>
-                        <p>Extrait de Naissance</p>
+                        <p> Extrait d'Acte de Naissance </p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="base">
@@ -54,6 +54,31 @@
                                     <span class="sub-item">Liste des Extraits</span>
                                 </a>
                             </li>
+
+                            <li>
+                                <a href="{% url 'Birth_Certificate:birth_list' %}">
+                                    <span class="sub-item">Copie Intégrale</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'Birth_Certificate:birth_list' %}">
+                                    <span class="sub-item">Acte de Naissance Code 84</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'Birth_Certificate:birth_list' %}">
+                                    <span class="sub-item">Acte de Naissance Loi2013</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'Birth_Certificate:birth_list' %}">
+                                    <span class="sub-item">Acte de Naissance Typique</span>
+                                </a>
+                            </li>
+
                             {#                    <li>#}
                             {#                      <a href="components/gridsystem.html">#}
                             {#                        <span class="sub-item">Demandes</span>#}
@@ -62,10 +87,11 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#sidebarLayouts">
                         <i class="fas fa-layer-group"></i>
-                        <p>Acte de Mariage</p>
+                        <p> Extrait d'Acte de Mariage </p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="sidebarLayouts">
@@ -80,6 +106,13 @@
                                     <span class="sub-item">Liste des Extraits</span>
                                 </a>
                             </li>
+
+                            <li>
+                                <a href="{% url 'Marriage:marriage_list' %}">
+                                    <span class="sub-item">Avis de Mentions de Mariage</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>
@@ -87,7 +120,7 @@
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#maps">
                         <i class="fas fa-layer-group"></i>
-                        <p>Acte de Décès</p>
+                        <p> Extrait d'Acte de Décès </p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="maps">
@@ -100,6 +133,34 @@
                             <li>
                                 <a href="{% url 'Death:list' %}">
                                     <span class="sub-item">Liste des Extraits</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#map">
+                        <i class="fas fa-layer-group"></i>
+                        <p> Jugement Supplétif </p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="map">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{% url 'Death:create' %}">
+                                    <span class="sub-item">Nouvel Extrait</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'Death:list' %}">
+                                    <span class="sub-item">Liste des Extraits</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'Death:list' %}">
+                                    <span class="sub-item">Copie Intégrale</span>
                                 </a>
                             </li>
                         </ul>
@@ -141,6 +202,90 @@
                                     <span class="caret"></span>
                                 </a>
                                 <div class="collapse" id="subnav2">
+                                    <ul class="nav nav-collapse subnav">
+                                        <li>
+                                            <a href="{% url 'Life:life_create' %}">
+                                                <span class="sub-item"> Nouveau Certificat </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'Life:life_list' %}">
+                                                <span class="sub-item"> Liste des Certificat </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a data-bs-toggle="collapse" href="#subnav3">
+                                    <span class="sub-item">Certificat de Vie et d'Entretien</span>
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="collapse" id="subnav3">
+                                    <ul class="nav nav-collapse subnav">
+                                        <li>
+                                            <a href="{% url 'Life:life_create' %}">
+                                                <span class="sub-item"> Nouveau Certificat </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'Life:life_list' %}">
+                                                <span class="sub-item"> Liste des Certificat </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a data-bs-toggle="collapse" href="#subnav4">
+                                    <span class="sub-item">Certificat de Déménagement</span>
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="collapse" id="subnav4">
+                                    <ul class="nav nav-collapse subnav">
+                                        <li>
+                                            <a href="{% url 'Life:life_create' %}">
+                                                <span class="sub-item"> Nouveau Certificat </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'Life:life_list' %}">
+                                                <span class="sub-item"> Liste des Certificat </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a data-bs-toggle="collapse" href="#subnav5">
+                                    <span class="sub-item">Certificat de Non Divorce</span>
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="collapse" id="subnav5">
+                                    <ul class="nav nav-collapse subnav">
+                                        <li>
+                                            <a href="{% url 'Life:life_create' %}">
+                                                <span class="sub-item"> Nouveau Certificat </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'Life:life_list' %}">
+                                                <span class="sub-item"> Liste des Certificat </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a data-bs-toggle="collapse" href="#subnav6">
+                                    <span class="sub-item">Certificat de Non Déclaration de Décès</span>
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="collapse" id="subnav6">
                                     <ul class="nav nav-collapse subnav">
                                         <li>
                                             <a href="{% url 'Life:life_create' %}">
