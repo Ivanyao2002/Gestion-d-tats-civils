@@ -12,6 +12,8 @@ class BirthEditForm(forms.ModelForm):
     class Meta:
         model = Birth
         fields = [
+            'num_registry',
+            'registration_date',
             'birth_date',
             'birth_time',
             'child_last_name',

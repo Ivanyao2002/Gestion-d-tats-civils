@@ -14,12 +14,12 @@ def print_birth_certificate(request, birth_record_id):
     birth_record = get_object_or_404(Birth, id=birth_record_id)
     date = timezone.now().strftime('%d/%m/%Y')
     heure = timezone.now().strftime("%H:%M:%S")
-    annee = timezone.now().year
-    registry_id = birth_record.registry_id
-    registry = Registry.objects.get(id=registry_id)
+    annee = birth_record.registration_date.year
+    # registry_id = birth_record.registry_id
+    # registry = Registry.objects.get(id=registry_id)
     settings = Settings.get_settings()
     return render(request, 'beta.html',
-                  {'birth_record': birth_record, 'annee': annee, 'registre': registry, 'setting': settings, 'date': date, 'heure': heure})
+                  {'birth_record': birth_record, 'annee': annee, 'setting': settings, 'date': date, 'heure': heure})
 
 
 def create_birth(request):

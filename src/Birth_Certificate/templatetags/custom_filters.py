@@ -56,9 +56,9 @@ def convert_year_to_french(year):
 
     thousands = year // 1000
     if thousands == 1:
-        thousands_str = "mille"
+        thousands_str = "mil"
     else:
-        thousands_str = UNITS[thousands] + " mille"
+        thousands_str = UNITS[thousands] + " mil"
 
     hundreds = convert_hundred((year % 1000) // 100)
     below_hundred = convert_below_hundred(year % 100)

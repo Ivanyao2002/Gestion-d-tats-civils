@@ -85,17 +85,17 @@ class Death(models.Model):
 
 
 class Birth(models.Model):
-    registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
-    # registration_location = models.CharField(max_length=100)
+    num_registry = models.CharField(max_length=20)
+    registration_date = models.DateField()
     birth_date = models.DateField()
-    birth_time = models.TimeField()
+    birth_time = models.TimeField(blank=True, null=True)
     child_last_name = models.CharField(max_length=100)
     child_first_name = models.CharField(max_length=100)
     birthplace = models.CharField(max_length=100)
-    father = models.CharField(max_length=100)
-    mother = models.CharField(max_length=100)
-    father_profession = models.CharField(max_length=100)
-    mother_profession = models.CharField(max_length=200)
+    father = models.CharField(max_length=100, blank=True, null=True)
+    mother = models.CharField(max_length=100, blank=True, null=True)
+    father_profession = models.CharField(max_length=100, blank=True, null=True)
+    mother_profession = models.CharField(max_length=200, blank=True, null=True)
     creation_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

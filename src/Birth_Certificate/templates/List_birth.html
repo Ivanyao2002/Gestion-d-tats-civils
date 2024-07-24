@@ -78,7 +78,7 @@
                                         <tbody>
                                         {% for birth in births %}
                                             <tr>
-                                                <td>{{ birth.registry.registry_id }} du {{ birth.registry.creation_date | date:"d/m/Y"}} </td>
+                                                <td>{{ birth.num_registry }} du {{ birth.registration_date | date:"d/m/Y"}} </td>
                                                 <td>{{ birth.child_first_name | upper}} {{ birth.child_last_name | upper}}</td>
                                                 <td>{{ birth.birth_date }}</td>
                                                 <td>{{ birth.birthplace }}</td>
