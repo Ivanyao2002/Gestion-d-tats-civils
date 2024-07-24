@@ -57,16 +57,22 @@
                                 <form method="POST" id="birth-form" action="{% url 'Birth_Certificate:Creation_extrait' %}" target="_blank" onsubmit="clearForm()">
                                     {% csrf_token %}
                                     <div class="form-group row">
-                                        <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
-                                        <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <select class="form-select input-fixed" id="registry" name="registry">
-                                                {% for registry in registries %}
-                                                    <option value="{{ registry.id }}">{{ registry.registry_id }}</option>
-                                                {% endfor %}
-                                            </select>
-                                            {% if form.registry.errors %}
+                                        <label for="num_registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
+                                        <div class="col-lg-2 col-md-4 col-sm-4">
+                                            <input type="text" class="form-control" id="num_registry" name="num_registry" placeholder="Numéro" required>
+                                            {% if form.num_registry.errors %}
                                                 <ul class="text-danger">
-                                                    {% for error in form.registry.errors %}
+                                                    {% for error in form.num_registry.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-lg-2 col-md-5 col-sm-4">
+                                            <input type="date" class="form-control" id="registration_date" name="registration_date" placeholder="Date" required>
+                                            {% if form.registry_part2.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.registry_part2.errors %}
                                                         <li>{{ error }}</li>
                                                     {% endfor %}
                                                 </ul>
@@ -77,7 +83,7 @@
                                     <div class="form-group row">
                                         <label for="birth_date" class="col-lg-3 col-md-3 col-sm-4 text-end">Date de naissance :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="date" class="form-control" id="birth_date" name="birth_date" required>
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" >
                                             {% if form.birth_date.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.birth_date.errors %}
@@ -91,7 +97,7 @@
                                     <div class="form-group row">
                                         <label for="birth_time" class="col-lg-3 col-md-3 col-sm-4 text-end">Heure de naissance :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="time" class="form-control" id="birth_time" name="birth_time" required>
+                                            <input type="time" class="form-control" id="birth_time" name="birth_time" >
                                             {% if form.birth_time.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.birth_time.errors %}
@@ -105,7 +111,7 @@
                                     <div class="form-group row">
                                         <label for="child_first_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Nom de l'enfant :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="text" class="form-control" id="child_first_name" name="child_first_name" required>
+                                            <input type="text" class="form-control" id="child_first_name" name="child_first_name" >
                                             {% if form.child_last_name.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.child_last_name.errors %}
@@ -119,7 +125,7 @@
                                     <div class="form-group row">
                                         <label for="child_last_name" class="col-lg-3 col-md-3 col-sm-4 text-end">Prénom de l'enfant :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="text" class="form-control" id="child_last_name" name="child_last_name" required>
+                                            <input type="text" class="form-control" id="child_last_name" name="child_last_name" >
                                             {% if form.child_first_name.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.child_first_name.errors %}
@@ -133,7 +139,7 @@
                                     <div class="form-group row">
                                         <label for="birthplace" class="col-lg-3 col-md-3 col-sm-4 text-end">Lieu de naissance :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="text" class="form-control" id="birthplace" name="birthplace" required>
+                                            <input type="text" class="form-control" id="birthplace" name="birthplace" >
                                             {% if form.birthplace.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.birthplace.errors %}
@@ -147,7 +153,7 @@
                                     <div class="form-group row">
                                         <label for="father" class="col-lg-3 col-md-3 col-sm-4 text-end">Père :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="text" class="form-control" id="father" name="father" required>
+                                            <input type="text" class="form-control" id="father" name="father" >
                                             {% if form.father.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.father.errors %}
@@ -161,7 +167,7 @@
                                     <div class="form-group row">
                                         <label for="father_profession" class="col-lg-3 col-md-3 col-sm-4 text-end">Profession du père :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="text" class="form-control" id="father_profession" name="father_profession" required>
+                                            <input type="text" class="form-control" id="father_profession" name="father_profession" >
                                             {% if form.father_profession.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.father_profession.errors %}
@@ -175,7 +181,7 @@
                                     <div class="form-group row">
                                         <label for="mother" class="col-lg-3 col-md-3 col-sm-4 text-end">Mère :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="text" class="form-control" id="mother" name="mother" required>
+                                            <input type="text" class="form-control" id="mother" name="mother" >
                                             {% if form.mother.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.mother.errors %}
@@ -189,7 +195,7 @@
                                     <div class="form-group row">
                                         <label for="mother_profession" class="col-lg-3 col-md-3 col-sm-4 text-end">Profession de la Mère :</label>
                                         <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="text" class="form-control" id="mother_profession" name="mother_profession" required>
+                                            <input type="text" class="form-control" id="mother_profession" name="mother_profession" >
                                             {% if form.mother_profession.errors %}
                                                 <ul class="text-danger">
                                                     {% for error in form.mother_profession.errors %}
@@ -244,6 +250,7 @@
 
     // Mettre le minimum de l'input des dates
     document.getElementById("birth_date").max = today;
+    document.getElementById("registration_date").max = today;
 
     function clearForm() {
         setTimeout(() => {

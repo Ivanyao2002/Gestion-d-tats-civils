@@ -85,7 +85,7 @@ class Death(models.Model):
 
 
 class Birth(models.Model):
-    num_registry = models.CharField(max_length=20)
+    num_registry = models.CharField(unique=True, max_length=20)
     registration_date = models.DateField()
     birth_date = models.DateField()
     birth_time = models.TimeField(blank=True, null=True)
