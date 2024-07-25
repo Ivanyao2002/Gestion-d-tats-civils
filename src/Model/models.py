@@ -1,6 +1,8 @@
 from django.contrib.auth.base_user import BaseUserManager
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 
 class MyUserManager(BaseUserManager):
@@ -85,7 +87,7 @@ class Death(models.Model):
 
 
 class Birth(models.Model):
-    num_registry = models.CharField(unique=True, max_length=20)
+    num_registry = models.CharField(max_length=20)
     registration_date = models.DateField()
     birth_date = models.DateField()
     birth_time = models.TimeField(blank=True, null=True)
@@ -97,9 +99,20 @@ class Birth(models.Model):
     father_profession = models.CharField(max_length=100, blank=True, null=True)
     mother_profession = models.CharField(max_length=200, blank=True, null=True)
     creation_date = models.DateTimeField(default=timezone.now)
+    registry = models.CharField(max_length=30, unique=True, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        # Update the registry field before saving
+        self.registry = f"{self.num_registry}-{self.registration_date.strftime('%Y%m%d')}"
+
+        # Ensure that the registry is unique
+        if Birth.objects.exclude(pk=self.pk).filter(registry=self.registry).exists():
+            raise ValidationError(_('A record with this registry already exists.'))
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.child_last_name
+        return self.registry
 
 
 class Divorce(models.Model):
