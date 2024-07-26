@@ -113,6 +113,8 @@ class Birth(models.Model):
     mother_profession = models.CharField(max_length=200, blank=True, null=True)
     creation_date = models.DateTimeField(default=timezone.now)
     registry = models.CharField(max_length=30, unique=True, blank=True, null=True)
+    sexe = models.CharField(max_length=10, null=True)
+
 
     def save(self, *args, **kwargs):
         # Update the registry field before saving
