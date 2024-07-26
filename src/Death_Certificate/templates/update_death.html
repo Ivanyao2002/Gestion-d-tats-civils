@@ -45,11 +45,20 @@
                             <div class="card-body">
                                 <form method="POST" id="death-edit-form" action="{% url 'Death:update' death.id %}" target="_blank">
                                     {% csrf_token %}
-                                     <div class="form-group row">
-                                        <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
-                                        <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <input type="text" class="form-control" id="registry" name="registry" value="{{ death.registry.registry_id }}" disabled>
-                                            <input type="hidden" name="registry" value="{{ death.registry.id }}">
+                                    <div class="form-group row">
+                                        <label for="num_registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
+                                        <div class="col-lg-2 col-md-4 col-sm-4">
+                                            <input type="text" class="form-control" id="num_registry" name="num_registry" placeholder="Numéro" required value="{{ death.num_registry }}">
+                                            {% if form.num_registry.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.num_registry.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-lg-2 col-md-5 col-sm-4">
+                                            <input type="date" class="form-control" id="registration_date" name="registration_date" placeholder="Date" required value="{{ death.registration_date | date:'Y-m-d' }}">
                                         </div>
                                     </div>
 
@@ -92,6 +101,15 @@
                                                     {% endfor %}
                                                 </ul>
                                             {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="sex" class="col-lg-3 col-md-3 col-sm-4 text-end">Sexe :</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="sex" name="sex" required>
+                                                <option value="M" {% if death.sex == 'M' %} selected {% endif %}>Homme</option>
+                                                <option value="F" {% if death.sex == 'F' %} selected {% endif %}>Femme</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -226,7 +244,7 @@
     document.getElementById("death_date").max = today;
 </script>
 <script>
-     document.getElementById('death-edit-form').addEventListener('submit', function(event) {
+    document.getElementById('death-edit-form').addEventListener('submit', function(event) {
         // Récupère le formulaire
         var form = this;
 

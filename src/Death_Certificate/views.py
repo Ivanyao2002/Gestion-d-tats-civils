@@ -10,10 +10,8 @@ def print_death_certificate(request, death_id):
     heure = timezone.now().strftime("%H:%M:%S")
     annee = timezone.now().year
     settings = Settings.get_settings()
-    registry_id = death.registry_id
-    registry = Registry.objects.get(id=registry_id)
     return render(request, 'epsilon.html',
-                  {'death': death, 'registre': registry, 'annee': annee, 'setting': settings,
+                  {'death': death, 'annee': annee, 'setting': settings,
                    'date': date, 'heure': heure})
 
 
