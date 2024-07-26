@@ -69,31 +69,43 @@ class Marriage(models.Model):
 
 
 class Death(models.Model):
-    registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
-    death_location = models.CharField(max_length=100)
-    death_date = models.DateField()
-    death_time = models.TimeField()
-    deceased_last_name = models.CharField(max_length=100)
-    deceased_first_name = models.CharField(max_length=100)
-    deceased_birthplace = models.CharField(max_length=100)
-    deceased_birthdate = models.DateField()
-    deceased_profession = models.CharField(max_length=100)
-    deceased_father = models.CharField(max_length=100)
-    deceased_mother = models.CharField(max_length=100)
+    num_registry = models.CharField(max_length=20)
+    registration_date = models.DateField()
+    death_location = models.CharField(max_length=100, null=True)
+    death_date = models.DateField(null=True)
+    death_time = models.TimeField(blank=True, null=True)
+    deceased_last_name = models.CharField(max_length=100, null=True)
+    deceased_first_name = models.CharField(max_length=100, null=True)
+    deceased_birthplace = models.CharField(max_length=100, null=True)
+    deceased_birthdate = models.DateField(blank=True, null=True)
+    deceased_profession = models.CharField(max_length=100, null=True)
+    deceased_father = models.CharField(max_length=100, null=True)
+    deceased_mother = models.CharField(max_length=100, null=True)
     creation_date = models.DateTimeField(default=timezone.now)
+    registry = models.CharField(max_length=30, unique=True, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        # Update the registry field before saving
+        self.registry = f"{self.num_registry}-{self.registration_date.strftime('%Y%m%d')}"
+
+        # Ensure that the registry is unique
+        if Death.objects.exclude(pk=self.pk).filter(registry=self.registry).exists():
+            raise ValidationError(_('A record with this registry already exists.'))
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.deceased_last_name
+        return self.registry
 
 
 class Birth(models.Model):
     num_registry = models.CharField(max_length=20)
     registration_date = models.DateField()
-    birth_date = models.DateField()
+    birth_date = models.DateField(null=True)
     birth_time = models.TimeField(blank=True, null=True)
     child_last_name = models.CharField(max_length=100)
     child_first_name = models.CharField(max_length=100)
-    birthplace = models.CharField(max_length=100)
+    birthplace = models.CharField(max_length=100, null=True)
     father = models.CharField(max_length=100, blank=True, null=True)
     mother = models.CharField(max_length=100, blank=True, null=True)
     father_profession = models.CharField(max_length=100, blank=True, null=True)
