@@ -68,7 +68,7 @@
 <p style="position:absolute;top:121px;left:606px;white-space:nowrap" class="ft15"><b>{{ annee }}</b></p>
 <p style="position:absolute;top:326px;left:359px;white-space:nowrap" class="ft116"><b>{{ death.deceased_birthplace | upper }}&#160;le&#160;&#160;{{ death.deceased_birthdate | date_to_french_string }}&#160;<br/>/°.................................................&#160;..............................................................</b></p>
 <p style="position:absolute;top:293px;left:520px;white-space:nowrap" class="ft17"><b>&#160;-&#160;{{ death.deceased_first_name | upper }}&#160;&#160;{{ death.deceased_last_name | upper }}&#160;/°&#160;&#160;.......................</b></p>
-<p style="position:absolute;top:407px;left:300px;white-space:nowrap" class="ft10">{% if death.sex == 'M' %}Fils{% else %}Fille {% endif %}</p>
+<p style="position:absolute;top:407px;left:300px;white-space:nowrap" class="ft10">{% if death.sexe == 'M' %}Fils{% else %}Fille {% endif %}</p>
 <p style="position:absolute;top:408px;left:342px;white-space:nowrap" class="ft16"><b>&#160;de&#160;{{ death.deceased_father | upper }}&#160;&#160;/°..................................&#160;....................................................</b></p>
 <p style="position:absolute;top:440px;left:301px;white-space:nowrap" class="ft10">et&#160;de&#160;<b>&#160;{{ death.deceased_mother | upper }}&#160;&#160;/°....................................&#160;......................................................</b></p>
 <p style="position:absolute;top:324px;left:84px;white-space:nowrap" class="ft18">{{ death.num_registry}}&#160;du&#160;{{ death.registration_date | date:"d/m/Y"}}</p>
