@@ -43,13 +43,13 @@
 </div>
 <nobr><nowrap>
     <div class="pos" id="_0:0" style="position:absolute;top:110px;left:90px">
-          <img src="" height="100" width="100" usemap="#Map">
+          <img src="{% if  setting.logo.url  %}{{ setting.logo.url }} {% endif %}" height="100" width="100" usemap="#Map">
     </div>
         <div class="pos" id="_47:38" style="top:38;left:47">
     <span id="_13.5" style=" font-family:Arial; font-size:13.5px; color:#000000">
     DEPARTEMENT DE {{ setting.departement | upper }}</span>
         </div>
-        <div class="pos" id="_577:52" style="top:52px;left:577px">
+        <div class="pos" id="_577:52" *         style="top:52px;left:577px">
     <span id="_12.2" style="font-weight:bold; font-family:Arial; font-size:12.2px; color:#000000">
     REPUBLIQUE DE COTE  D'IVOIRE</span>
         </div>

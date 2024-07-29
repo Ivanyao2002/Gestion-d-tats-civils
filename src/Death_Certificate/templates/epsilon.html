@@ -59,7 +59,7 @@
     <button class="button" onclick="window.print()">Imprimer</button>
 </div>
 <div id="page1-div" style="position:relative;width:892px;height:800px;">
-<img src="{{ setting.logo.url }}" alt="image" style="position:absolute;top:103px;left:93px;width:100px;height:100px;"/>
+<img src="{% if  setting.logo.url  %}{{ setting.logo.url }} {% endif %}" alt="image" style="position:absolute;top:103px;left:93px;width:100px;height:100px;"/>
 <p style="position:absolute;top:480px;left:539px;white-space:nowrap" class="ft10">Délivré&#160;à&#160;&#160;{{ setting.city | upper}}&#160;le&#160;&#160;{{ date }}&#160;{{ heure }}</p>
 <p style="position:absolute;top:215px;left:103px;white-space:nowrap" class="ft11"><b>ETAT&#160;&#160;CIVIL</b></p>
 <p style="position:absolute;top:243px;left:74px;white-space:nowrap" class="ft12">CIRCONSCRIPTION&#160;D'ETAT&#160;CIVIL</p>
