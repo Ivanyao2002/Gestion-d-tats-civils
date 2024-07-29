@@ -30,5 +30,6 @@ urlpatterns = [
     path('Certificat-de-vie/', include('Life_Certificate.urls')),
     path('Certificat-de-non-remarriage/', include('Non_Remarriage.urls')),
     path('Extrait-de-décès/', include('Death_Certificate.urls')),
+    path('Users/', include('Auth.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

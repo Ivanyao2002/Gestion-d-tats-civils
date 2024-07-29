@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Inscription d'un nouvel utilisateur</h2>
+            {% if user.is_authenticated %}
+         <h6 class="mb-0 line-height text-white">{{ user.username|title}}</h6>
+    <a href="{% url 'auth:logout' %}">deco</a>
+    {% endif  %}
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+    </div>
+</body>
+</html>

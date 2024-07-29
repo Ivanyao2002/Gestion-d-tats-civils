@@ -1,4 +1,4 @@
-from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
@@ -8,7 +8,9 @@ from django.utils.translation import gettext_lazy as _
 class MyUserManager(BaseUserManager):
     def create_user(self, username, password=None):
         if not username:
-            raise ValueError("You must provide a username")
+            raise ValueError("Vous devez entrer un nom d'utilisateur !")
+        if password is None:
+            raise ValueError("Vous devez entrer un mot de passe !")
 
         user = self.model(username=username)
         user.set_password(password)
@@ -23,15 +25,46 @@ class MyUserManager(BaseUserManager):
         return user
 
 
-class User(models.Model):
+class Roles(models.Model):
+    admin = 'admin'
+    civil_servant = "civil_servant"
+    input_agent = 'input_agent'
+
+    ROLE_CHOICES = [
+        (admin, 'ADMIN'),
+        (civil_servant, "Officier d'état civil"),
+        (input_agent, "Agent de saisir"),
+    ]
+    role = models.CharField(max_length=100, choices=ROLE_CHOICES, default='input_agent')
+
+    def __str__(self):
+        return dict(self.ROLE_CHOICES).get(self.role, self.role)
+
+
+class UsersAuth(AbstractBaseUser):
+    date_mise_a_jour = models.DateTimeField(verbose_name="Date de mise a jour", auto_now=True)
+    username = models.CharField(unique=True, max_length=50)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=20)
-    email = models.EmailField()
-    role = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='images/')
+    phone = models.CharField(unique=True, max_length=20)
+    email = models.EmailField(unique=True, max_length=200)
+    role = models.ForeignKey(Roles, on_delete=models.SET_NULL, null=True, blank=True, related_name='users')
+    image = models.ImageField(upload_to='images_users/')
+    is_deleted = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
     USERNAME_FIELD = 'username'
     objects = MyUserManager()
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class Registry(models.Model):

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Life_Certificate',
     'Non_Remarriage',
     'Death_Certificate',
+    'Auth'
 ]
 
 MIDDLEWARE = [
@@ -83,15 +84,16 @@ WSGI_APPLICATION = 'gestion_etats_civils.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mairie_db',
-        'USER': 'postgres',
-        'PASSWORD': 'Pipi1306',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'OPTIONS': {
+            'sql_mode': 'STRICT_TRANS_TABLES',
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -134,6 +136,7 @@ STATICFILES_DIRS = [
     ]
 MEDIA_URL = '/medias/'
 MEDIA_ROOT = BASE_DIR / 'medias'
+AUTH_USER_MODEL = 'Model.UsersAuth'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

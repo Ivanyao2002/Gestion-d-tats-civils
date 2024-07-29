@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des utilisateurs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Liste des utilisateurs</h2>
+    {% if user.is_authenticated %}
+         <h6 class="mb-0 line-height text-white">{{ user.username|title}}</h6>
+    <a href="{% url 'auth:logout' %}">deco</a>
+    {% endif  %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Email</th>
+                    <th>Rôle</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>
+                            <a href="{% url 'auth:edit_user' user.pk %}" class="btn btn-warning">Modifier</a>
+                           <a class="iq-bg-danger zoom-on-hover" data-toggle="tooltip" data-placement="top" title="Supprimer l'utilisateur" href="#" onclick="confirmDeleteModal(this)" data-user-id="{{ user.pk }}">Supprimer<i class="ri-delete-bin-line"></i></a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">Aucun utilisateur trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+        {# Modal pour la suppresion #}
+   <div class="modal fade" id="confirmDeleteModal{{ user.pk }}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel{{ user.pk }}" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered" role="document">
+           <div class="modal-content">
+               <div class="modal-header" style="display: flex; justify-content: center; align-items: center;">
+                   <h5 class="modal-title" id="confirmDeleteModalLabel{{ users.id }}">Confirmation de la suppression</h5>
+               </div>
+               <div class="modal-body">
+                   Êtes-vous sûr de vouloir supprimer cet utilisateur ?
+               </div>
+               <div class="modal-footer" style="display: flex; justify-content: center; align-items: center;">
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                   <a href="#" class="btn btn-danger" onclick="executeDelete('{{ users.id }}')">Supprimer</a>
+               </div>
+           </div>
+       </div>
+   </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        window.confirmDeleteModal = function(linkElement) {
+            var userId = linkElement.getAttribute('data-user-id');
+            $('#confirmDeleteModal' + userId).modal('show');
+            $('#confirmDeleteModal' + userId).data('user-id', userId);
+        };
+
+        window.executeDelete = function() {
+            var userId = $('#confirmDeleteModal' + userId).data('user-id');
+            fetch(`/Users/delete/${userId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Utilisateur supprimé avec succès !");
+                    window.location.reload();
+                } else {
+                    alert("Erreur lors de la suppression de l'utilisateur.");
+                }
+            });
+            $('#confirmDeleteModal' + userId).modal('hide');
+        };
+    });
+</script>
+</body>
+</html>

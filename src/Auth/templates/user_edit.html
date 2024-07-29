@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier l'utilisateur</title>
+    <link rel="stylesheet" href="#">
+</head>
+<body>
+    <h1>Modifier l'utilisateur : {{ user.first_name }} {{ user.last_name }}</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form_user.as_p }}
+        <button type="submit">Sauvegarder les modifications</button>
+        <a href="{% url 'auth:list_users' %}">Annuler</a>
+    </form>
+</body>
+</html>
