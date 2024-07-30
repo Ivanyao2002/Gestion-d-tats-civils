@@ -76,7 +76,7 @@
                                         <tbody>
                                         {% for marriage in marriages %}
                                             <tr>
-                                                <td>{{ marriage.registry.registry_id }} du {{ marriage.registry.creation_date | date:"d/m/Y"}} </td>
+                                                <td>{{ marriage.num_registry }} du {{ marriage.registration_date | date:"d/m/Y"}} </td>
                                                 <td>{{ marriage.groom_first_name | upper}} {{ marriage.groom_last_name | upper}}</td>
                                                 <td>{{ marriage.bride_first_name | upper}} {{ marriage.bride_last_name | upper}}</td>
 

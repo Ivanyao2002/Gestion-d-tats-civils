@@ -50,22 +50,27 @@
                                 <form method="POST" id="marriage-form" action="{% url 'Marriage:create_marriage' %}" target="_blank" onsubmit="clearForm()">
                                     {% csrf_token %}
                                     <div class="form-group row">
-                                        <label for="registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
-                                        <div class="col-lg-4 col-md-9 col-sm-8">
-                                            <select class="form-select input-fixed" id="registry" name="registry">
-                                                {% for registry in registries %}
-                                                    <option value="{{ registry.id }}">{{ registry.registry_id }}</option>
-                                                {% endfor %}
-                                            </select>
-                                            {% if form.registry.errors %}
+                                        <label for="num_registry" class="col-lg-3 col-md-3 col-sm-4 text-end">Registre :</label>
+                                        <div class="col-lg-2 col-md-4 col-sm-4">
+                                            <input type="text" class="form-control" id="num_registry" name="num_registry" placeholder="Numéro" required>
+                                            {% if form.num_registry.errors %}
                                                 <ul class="text-danger">
-                                                    {% for error in form.registry.errors %}
+                                                    {% for error in form.num_registry.errors %}
                                                         <li>{{ error }}</li>
                                                     {% endfor %}
                                                 </ul>
                                             {% endif %}
                                         </div>
-
+                                        <div class="col-lg-2 col-md-5 col-sm-4">
+                                            <input type="date" class="form-control" id="registration_date" name="registration_date" placeholder="Date" required>
+                                            {% if form.registry_part2.errors %}
+                                                <ul class="text-danger">
+                                                    {% for error in form.registry_part2.errors %}
+                                                        <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                     <div class="form-group row te">
                                         <label for="date" class="col-lg-3 col-md-3 col-sm-4 text-end">Date du mariage :</label>

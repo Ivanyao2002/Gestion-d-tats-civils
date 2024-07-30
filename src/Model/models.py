@@ -78,7 +78,8 @@ class Registry(models.Model):
 
 
 class Marriage(models.Model):
-    registry = models.ForeignKey(Registry, on_delete=models.CASCADE)
+    num_registry = models.CharField(max_length=20)
+    registration_date = models.DateField()
     groom_first_name = models.CharField(max_length=100)
     groom_last_name = models.CharField(max_length=100)
     groom_birthplace = models.CharField(max_length=100)
@@ -96,6 +97,17 @@ class Marriage(models.Model):
     date = models.DateField()
     hours = models.TimeField()
     creation_date = models.DateTimeField(default=timezone.now)
+    registry = models.CharField(max_length=30, unique=True, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        # Update the registry field before saving
+        self.registry = f"{self.num_registry}-{self.registration_date.strftime('%Y%m%d')}"
+
+        # Ensure that the registry is unique
+        if Death.objects.exclude(pk=self.pk).filter(registry=self.registry).exists():
+            raise ValidationError(_('A record with this registry already exists.'))
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'Marriage between {self.groom_last_name}  {self.groom_first_name} and  {self.bride_last_name}  {self.bride_first_name}'
@@ -147,7 +159,6 @@ class Birth(models.Model):
     creation_date = models.DateTimeField(default=timezone.now)
     registry = models.CharField(max_length=30, unique=True, blank=True, null=True)
     sexe = models.CharField(max_length=10, null=True)
-
 
     def save(self, *args, **kwargs):
         # Update the registry field before saving
